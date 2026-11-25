@@ -461,6 +461,51 @@ header{background:#fffdf9!important;-webkit-backdrop-filter:none!important;backd
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style id="polish-v2">
+/* v2 polish: backgrounds, buttons, interactions */
+.pagehead{position:relative;isolation:isolate;overflow:hidden;padding-block:96px 150px!important;background:#f4ede2 url(img/bg-day.jpg) center bottom/cover no-repeat!important}
+.pagehead::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#fbf6eef2 0%,#fbf6eed9 45%,#fbf6ee40 78%,#fbf6ee00 100%)}
+.pagehead::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--beads)}
+@media (max-width:700px){.pagehead{padding-block:64px 110px!important}}
+footer{background:linear-gradient(180deg,#1d2528fa 0%,#1d2528eb 55%,#1d2528c7 100%),#1d2528 url(img/bg-dusk.jpg) center 70%/cover no-repeat!important;padding-bottom:70px!important}
+footer::after{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--beads)}
+section.sand{position:relative;overflow:hidden}
+section.sand::after{content:"";position:absolute;right:-40px;bottom:-10px;width:340px;height:230px;pointer-events:none;opacity:.09;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 230'%3E%3Cpath fill='%233f6b3a' d='M20 92c30-34 92-50 150-48 62 2 118 20 150 52-40-10-78-12-112-8l-22 20 10-22c-20 0-40 4-58 10l-14 22 2-18c-36 4-74 0-106-8z'/%3E%3Cpath fill='none' stroke='%231d2528' stroke-width='7' stroke-linecap='round' d='M172 228c2-50-2-84-10-116M166 150c-14-22-34-36-56-44M168 132c14-18 34-28 58-32'/%3E%3C/svg%3E") center/contain no-repeat}
+section.sand>.wrap{position:relative;z-index:1}
+.impact::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;background:radial-gradient(circle at 1px 1px,#fff 1.2px,transparent 1.6px) 0 0/22px 22px}
+.impact>.wrap{position:relative}
+/* buttons */
+.btn{position:relative;overflow:hidden;letter-spacing:.01em;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background .2s}
+.btn-sun{background:linear-gradient(180deg,#c2502f,#a93d24);box-shadow:0 1px 0 #ffffff40 inset,0 6px 14px -6px #b5452b99}
+.btn-sun::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,#fff0,#ffffff47,#fff0);transition:left .6s ease}
+.btn-sun:hover::before{left:120%}
+.btn-sun::after,.btn-line::after,.btn-glass::after{content:"\2192";display:inline-block;margin-left:8px;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.btn:hover::after{transform:translateX(4px)}
+.btn:active{transform:translateY(0) scale(.97)!important}
+.btn-line:hover{background:#1d25280f;transform:translateY(-2px)}
+.band .btn-line:hover{background:#ffffff26}
+nav a:not(.btn){position:relative}
+nav a:not(.btn)::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:2px;background:var(--sun);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
+/* cards and pictures */
+.card:hover,.path:hover{transform:translateY(-5px);box-shadow:0 2px 4px #3a2a1a14,0 22px 40px -20px #3a2a1a59!important}
+.path{transition:transform .25s,box-shadow .25s}
+.illus-lg{transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.illus-lg:hover{transform:scale(1.015) rotate(-.4deg);box-shadow:0 26px 44px -22px #3a2a1a80}
+.photo img,.upd img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.photo:hover img{transform:scale(1.03)}
+#scrollbar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;background:var(--beads);transform:scaleX(0);transform-origin:left;pointer-events:none}
+#totop{position:fixed;right:18px;bottom:84px;z-index:38;width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;background:#1d2528;color:#fff;font-size:18px;box-shadow:0 10px 24px -10px #1d2528;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s,transform .25s}
+#totop.show{opacity:1;transform:none;pointer-events:auto}
+#totop:hover{background:var(--sun)}
+.page.active{animation:pagein .45s ease both}
+@keyframes pagein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* map */
+#topo{background:#1d2528}
+.leaflet-tooltip.tt-county{color:#fff!important;font-size:12px!important;text-shadow:0 0 4px #000,0 0 4px #000,0 1px 2px #000!important}
+.leaflet-tooltip.tt-isiolo{font-size:13px!important;padding:6px 12px!important;border-radius:50px!important;box-shadow:0 0 0 2px #fff,0 6px 16px #0008!important}
+@media (prefers-reduced-motion:reduce){.page.active{animation:none}.btn,.btn::after,.btn::before,.card,.path,.illus-lg,.photo img{transition:none!important}#scrollbar{display:none}}
+</style>
 </head>
 <body data-font="fraunces" data-bg="none">
 <div class="bg" aria-hidden="true"></div>
@@ -615,7 +660,7 @@ header{background:#fffdf9!important;-webkit-backdrop-filter:none!important;backd
   <section class="sand"><div class="wrap two">
     <div><p class="eyebrow">Where we work</p><h2 style="margin-top:8px">Isiolo County</h2><p style="color:var(--muted);margin-top:14px">Home to Borana, Samburu, Turkana and Meru communities, alongside Somali and other families. Children here may face long distances to school, drought and livestock losses that strain family budgets, and pressures that pull girls out of class. Positive change is already led by elders, women, teachers and local groups.</p></div>
     <div class="topo glass-card"><div id="topo" role="img" aria-label="Topographic map of Isiolo County with neighbouring county borders"></div><div class="topo-key"><span><i class="k-is"></i>Isiolo County border</span><span><i class="k-nb"></i>Neighbouring counties</span><span><i class="k-town"></i>Isiolo town</span></div></div>
-  </div><div class="wrap"><p class="caption">Topographic map: © OpenStreetMap contributors, SRTM; map style © OpenTopoMap (CC BY-SA). County borders: geoBoundaries (public domain). Only the county town is marked; no villages.</p></div></section>
+  </div><div class="wrap"><p class="caption">Satellite imagery: © Esri, Maxar, Earthstar Geographics. County borders: geoBoundaries (public domain). Only the county town is marked; no villages.</p></div></section>
   <section><div class="wrap two">
     <div><p class="eyebrow">Our people</p><h2 style="margin-top:8px">Founder and team</h2><p style="color:var(--muted);margin-top:14px">Founded by Josephine Ekiru, a peacebuilder from Isiolo and founder of the Queen of Peace Initiative, recipient of the 2021 Women Building Peace Award.</p></div>
     <div><p class="eyebrow">Our safeguarding promise</p><h2 style="margin-top:8px">Children's safety comes first</h2><ul class="list"><li>We never publish a child's name, face, school or village</li><li>Stories are shared only with consent from the child and guardian</li><li>Concerns are reported to the right authorities</li><li>Every gift goes to the Foundation's own account</li></ul><p style="color:var(--muted);margin-top:18px">Questions or concerns about a child's safety? Email <a href="mailto:hello@qophope.org">hello@qophope.org</a>.</p></div>
@@ -777,14 +822,21 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
 </script>
 <script>
 (function(){let map=null;function init(){if(map||!window.L)return;const el=document.getElementById('topo');if(!el||!el.offsetWidth)return;
- map=L.map(el,{scrollWheelZoom:false}).setView([0.9,38.4],7);
- L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{subdomains:'abc',maxZoom:15,attribution:'© OpenStreetMap contributors, SRTM | style © OpenTopoMap (CC BY-SA) | borders: geoBoundaries'}).addTo(map);
- fetch('img/isiolo-region.geojson').then(r=>r.json()).then(g=>{let is=null;L.geoJSON(g,{style:f=>f.properties.name==='Isiolo'?{color:'#b5452b',weight:3,fillColor:'#b5452b',fillOpacity:.1}:{color:'#1d2528',weight:1.5,dashArray:'5 5',fill:false},
+ map=L.map(el,{scrollWheelZoom:false,minZoom:6,maxZoom:12,maxBounds:[[-3.5,33],[5.5,43.5]],maxBoundsViscosity:.9}).setView([0.9,38.4],7);
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:12,attribution:'Imagery © Esri, Maxar, Earthstar Geographics | borders: geoBoundaries'}).addTo(map);
+ fetch('img/isiolo-region.geojson').then(r=>r.json()).then(g=>{let is=null;
+  const isi=g.features.find(f=>f.properties.name==='Isiolo');
+  if(isi){const rings=(isi.geometry.type==='Polygon'?[isi.geometry.coordinates]:isi.geometry.coordinates).map(p=>p[0].map(c=>[c[1],c[0]]));
+   L.polygon([[[-60,-20],[-60,90],[60,90],[60,-20]],...rings],{stroke:false,fillColor:'#10171a',fillOpacity:.5,interactive:false}).addTo(map);
+   L.geoJSON(isi,{style:{color:'#fff',weight:8,opacity:.95,fill:false,lineJoin:'round'},interactive:false}).addTo(map);}
+  L.geoJSON(g,{style:f=>f.properties.name==='Isiolo'?{color:'#e2562f',weight:4,fillColor:'#d9a441',fillOpacity:.08,lineJoin:'round'}:{color:'#fff',weight:1.2,opacity:.75,dashArray:'4 6',fill:false},
   onEachFeature:(f,l)=>{const me=f.properties.name==='Isiolo';if(me)is=l;l.bindTooltip(me?'Isiolo County':f.properties.name,{permanent:true,direction:'center',className:me?'tt-isiolo':'tt-county'})}}).addTo(map);
-  if(is)map.fitBounds(is.getBounds(),{padding:[40,40]});});
- L.circleMarker([0.3546,37.5822],{radius:6,color:'#fff',weight:2,fillColor:'#1d2528',fillOpacity:1}).addTo(map).bindTooltip('Isiolo town',{direction:'right',offset:[8,0]});}
+  if(is)map.fitBounds(is.getBounds(),{padding:[30,30]});});
+ L.circleMarker([0.3546,37.5822],{radius:6,color:'#fff',weight:2.5,fillColor:'#e2562f',fillOpacity:1}).addTo(map).bindTooltip('Isiolo town',{direction:'right',offset:[8,0]});}
  function tick(){setTimeout(()=>{init();if(map)map.invalidateSize()},350)}
  addEventListener('hashchange',tick);addEventListener('load',tick);})();
 </script>
+<div id="scrollbar"></div><button id="totop" aria-label="Back to top">↑</button>
+<script>(function(){const sb=document.getElementById('scrollbar'),tt=document.getElementById('totop');let t=0;function u(){t=0;const h=document.documentElement,m=h.scrollHeight-h.clientHeight;sb.style.transform='scaleX('+(m>0?h.scrollTop/m:0)+')';tt.classList.toggle('show',h.scrollTop>700)}addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(u)},{passive:true});tt.onclick=()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});u()})();</script>
 </body>
 </html>
