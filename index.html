@@ -1109,6 +1109,19 @@ html.saver footer{background:#1d2528!important}
 @media (hover:hover){.moon-grab:hover~.moon-hint{opacity:1}}
 @media (prefers-reduced-motion:reduce){.moon{transition:none}}
 </style>
+<style id="moon-v2">
+/* the moon by day: white and quiet against the light sky, no glow, its edge held by a faint cool line. --mn runs from 0 (day) to 1 (night) */
+.moon{filter:drop-shadow(0 0 calc(var(--md,50px)*.12) color-mix(in srgb,#fff1cf calc(var(--mn,1)*60%),transparent)) drop-shadow(0 0 calc(var(--md,50px)*.7) color-mix(in srgb,#ffe6ad calc(var(--mn,1)*28%),transparent)) drop-shadow(0 0 calc(var(--md,50px)*.05) color-mix(in srgb,#62728f calc((1 - var(--mn,1))*46%),transparent))}
+.mb0{stop-color:color-mix(in srgb,color-mix(in srgb,#ffe3b4 calc((1 - var(--mh,1))*100%),#fffbf0) calc(var(--mn,1)*100%),#fff)}
+.mb1{stop-color:color-mix(in srgb,color-mix(in srgb,#f3b672 calc((1 - var(--mh,1))*100%),#f3ead3) calc(var(--mn,1)*100%),#f8f9fb)}
+.mb2{stop-color:color-mix(in srgb,color-mix(in srgb,#dc9150 calc((1 - var(--mh,1))*100%),#dccfb1) calc(var(--mn,1)*100%),#dde3ec)}
+.mn-face{opacity:calc(.62 + .38*var(--mn,1))}
+@supports not (color:color-mix(in srgb,red,blue)){
+ .moon{filter:drop-shadow(0 0 calc(var(--md,50px)*.12) #fff1cf99) drop-shadow(0 0 calc(var(--md,50px)*.7) #ffe6ad47)}
+ .moon-day .moon{filter:drop-shadow(0 0 calc(var(--md,50px)*.05) #62728f75)}
+ .mb0{stop-color:#fffbf0}.mb1{stop-color:#f3ead3}.mb2{stop-color:#dccfb1}
+}
+</style>
 </head>
 <body data-font="fraunces" data-bg="none">
 <a class="skip" href="#home" data-noi18n>Skip to the content</a>
@@ -1525,27 +1538,27 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
  document.querySelectorAll('.pagehead').forEach(p=>{const d=document.createElement('div');d.className='dusk';const k=document.createElement('div');k.className='sky';k.setAttribute('aria-hidden','true');k.innerHTML='<i class="sun"></i>';const sc=document.createElement('div');sc.className='scrim';p.prepend(k);p.prepend(sc);p.prepend(d);const sh=document.createElement('div');sh.className='shade';sh.setAttribute('aria-hidden','true');sh.innerHTML=SH;d.after(sh);const gr=document.createElement('button');gr.type='button';gr.className='sun-grab';gr.setAttribute('aria-label','The sun. Drag it, or use the left and right arrow keys, to change the time of day in Isiolo');p.appendChild(gr);const hn=document.createElement('span');hn.className='sun-hint';hn.textContent='Drag the sun';p.appendChild(hn)});
  const MN='<svg class="moon" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><defs><radialGradient id="mb~" cx=".5" cy=".5" r=".5"><stop offset="0" class="mb0"/><stop offset=".7" class="mb1"/><stop offset="1" class="mb2"/></radialGradient><radialGradient id="mm~"><stop offset="0" stop-color="#565f73" stop-opacity=".34"/><stop offset=".45" stop-color="#565f73" stop-opacity=".27"/><stop offset=".78" stop-color="#565f73" stop-opacity=".1"/><stop offset="1" stop-color="#565f73" stop-opacity="0"/></radialGradient><radialGradient id="mt~"><stop offset="0" stop-color="#fffdf5" stop-opacity=".7"/><stop offset="1" stop-color="#fffdf5" stop-opacity="0"/></radialGradient><clipPath id="mc~"><path class="mn-lit" d="M0-40A40 40 0 0 1 0 40A40 40 0 0 1 0-40Z"/></clipPath></defs><circle r="40" class="mn-dark"/><g clip-path="url(#mc~)"><circle r="40" fill="url(#mb~)"/><g class="mn-face" fill="url(#mm~)"><ellipse cx="-25" cy="-5" rx="16" ry="27" transform="rotate(-8 -25 -5)"/><ellipse cx="-10" cy="-21" rx="18" ry="15"/><ellipse cx="-18" cy="6" rx="12" ry="11"/><ellipse cx="11" cy="-18.5" rx="12" ry="11.5"/><ellipse cx="20" cy="-6" rx="14.5" ry="12"/><ellipse cx="3" cy="-9" rx="7" ry="6"/><ellipse cx="32" cy="-12" rx="5.6" ry="7.4"/><ellipse cx="29" cy="5" rx="8" ry="11"/><ellipse cx="21" cy="11.5" rx="7" ry="7"/><ellipse cx="-10" cy="15" rx="15" ry="11.5"/><ellipse cx="-24" cy="16" rx="7.5" ry="7.5"/><ellipse cx="-2" cy="-32" rx="21" ry="4.4"/><circle cx="-5.5" cy="27" r="7" fill="url(#mt~)"/></g></g></svg>';
  document.querySelectorAll('.pagehead').forEach((p,i)=>{p.querySelector('.sky').insertAdjacentHTML('beforeend',MN.replace(/~/g,i));const gr=document.createElement('button');gr.type='button';gr.className='moon-grab';gr.setAttribute('aria-label','The moon. Drag it, or use the left and right arrow keys, to move through the night in Isiolo');p.appendChild(gr);const hn=document.createElement('span');hn.className='moon-hint';hn.textContent='Drag the moon';p.appendChild(hn)});
- /* where the sun is: standard low-precision solar position, good to about a degree. alt = height above the horizon in degrees,
+ /* where the sun is: standard low-precision solar position, within 0.01 of a degree of NASA JPL Horizons for Isiolo (moon/check.js). alt = height above the horizon in degrees,
     az = direction measured from south (west positive), top = how high it gets at noon today */
- function sun(ms){const d=ms/864e5-.5+2440588-2451545,M=rad*(357.5291+.98560028*d),C=rad*(1.9148*Math.sin(M)+.02*Math.sin(2*M)+.0003*Math.sin(3*M)),Lo=M+C+rad*102.9372+Math.PI,e=rad*23.4397,dec=Math.asin(Math.sin(e)*Math.sin(Lo)),ra=Math.atan2(Math.sin(Lo)*Math.cos(e),Math.cos(Lo)),H=rad*(280.16+360.9856235*d)+rad*LNG-ra,ph=rad*LAT;
+ function sun(ms){const d=ms/864e5-.5+2440588-2451545,M=rad*(357.5291+.98560028*d),C=rad*(1.9148*Math.sin(M)+.02*Math.sin(2*M)+.0003*Math.sin(3*M)),Lo=M+C+rad*(102.9372+1.7195*d/36525-.0057)+Math.PI,e=rad*(23.4393-.013*d/36525),dec=Math.asin(Math.sin(e)*Math.sin(Lo)),ra=Math.atan2(Math.sin(Lo)*Math.cos(e),Math.cos(Lo)),H=rad*(280.46062+360.98564737*d)+rad*LNG-ra,ph=rad*LAT;
   return{alt:Math.asin(Math.sin(ph)*Math.sin(dec)+Math.cos(ph)*Math.cos(dec)*Math.cos(H))/rad,az:Math.atan2(Math.sin(H),Math.cos(H)*Math.sin(ph)-Math.tan(dec)*Math.cos(ph)),top:90-Math.abs(LAT-dec/rad)}}
  /* where the moon is over Isiolo and how it looks. The main terms of the standard lunar series, seen from the ground rather than the Earth's centre.
-    Checked against NASA JPL Horizons for Isiolo town, hourly, 20 Nov to 26 Dec 2026: position within 0.1 of a degree, lit share within half a point.
+    Checked against NASA JPL Horizons for Isiolo town (moon/check.js): position within 0.1 of a degree, lit share within half a point.
     alt = degrees above the horizon, az = from south (west positive), top = how high it gets, k = share of the disc that is lit, wax = growing,
-    tilt = which way the lit edge faces, north = which way the moon's own north points (degrees clockwise from straight up).
-    The picture looks south. On nights when the moon passes north of overhead it is drawn the way the rest of the scene is (rising left, setting right): flip. */
+    tilt = which way the lit edge faces, north = which way the moon's own north points: degrees clockwise from straight up,
+    as a person standing in Isiolo sees them when facing the moon. Never mirrored */
  function moon(ms){const d=ms/864e5-10957.5,T=(d+8e-4)/36525,s=x=>Math.sin(rad*x),c=x=>Math.cos(rad*x),e=23.4393,
    Mp=134.9634+477198.8675*T,D=2*(297.8502+445267.1114*T),Ms=357.5291+35999.0503*T,F=93.2721+483202.0175*T,
    lam=218.3164+481267.8812*T+6.2888*s(Mp)+1.274*s(D-Mp)+.6583*s(D)+.2136*s(2*Mp)-.1851*s(Ms)-.1143*s(2*F)+.0588*s(D-2*Mp)+.0571*s(D-Ms-Mp)+.0533*s(D+Mp)+.0458*s(D-Ms)-.0409*s(Ms-Mp)-.0347*s(D/2)-.0304*s(Ms+Mp),
    bet=5.1281*s(F)+.2806*s(Mp+F)+.2777*s(Mp-F)+.1732*s(D-F)+.0554*s(D-Mp+F)+.0463*s(D-Mp-F)+.0326*s(D+F),
-   par=.9508+.0518*c(Mp)+.0095*c(D-Mp)+.0078*c(D)+.0028*c(2*Mp),Ls=Ms+1.9148*s(Ms)+.02*s(2*Ms)+282.9372,st=280.46062+360.98564737*d+LNG,
+   par=.9508+.0518*c(Mp)+.0095*c(D-Mp)+.0078*c(D)+.0028*c(2*Mp),Ls=Ms+1.9148*s(Ms)+.02*s(2*Ms)+282.9372+1.7195*T-.0057,st=280.46062+360.98564737*d+LNG,
    /* a point of the sky as a direction from Isiolo: [west, south, up], then its declination */
    V=(l,b)=>{const dec=Math.asin(s(b)*c(e)+c(b)*s(e)*s(l))/rad,H=st-Math.atan2(s(l)*c(e)-Math.tan(rad*b)*s(e),c(l))/rad;return[s(H)*c(dec),c(H)*c(dec)*s(LAT)-s(dec)*c(LAT),c(H)*c(dec)*c(LAT)+s(dec)*s(LAT),dec]},
    g=V(lam,bet),r=1/s(par),M=[r*g[0],r*g[1],r*g[2]-1],Rm=Math.hypot(M[0],M[1],M[2]),m=[M[0]/Rm,M[1]/Rm,M[2]/Rm],sv=V(Ls,0),
-   alt=Math.asin(m[2]),az=Math.atan2(m[0],m[1]),ca=Math.cos(az),sa=Math.sin(az),f=Math.max(-1,Math.min(1,(LAT-g[3])/3)),
-   ang=v=>Math.atan2(f*(v[0]*ca-v[1]*sa),-m[2]*(v[0]*sa+v[1]*ca)+v[2]*Math.cos(alt))/rad,
+   alt=Math.asin(m[2]),az=Math.atan2(m[0],m[1]),ca=Math.cos(az),sa=Math.sin(az),
+   ang=v=>Math.atan2(v[0]*ca-v[1]*sa,-m[2]*(v[0]*sa+v[1]*ca)+v[2]*Math.cos(alt))/rad,
    S=[23455*sv[0]-M[0],23455*sv[1]-M[1],23455*sv[2]-M[2]];
-  return{alt:alt/rad,az,top:90-Math.abs(LAT-g[3]),k:(1-(S[0]*M[0]+S[1]*M[1]+S[2]*M[2])/(Math.hypot(S[0],S[1],S[2])*Rm))/2,wax:s(lam-Ls)>0,tilt:ang(sv),north:ang(V(0,90)),flip:f<0,f}}
+  return{alt:alt/rad,az,top:90-Math.abs(LAT-g[3]),k:(1-(S[0]*M[0]+S[1]*M[1]+S[2]*M[2])/(Math.hypot(S[0],S[1],S[2])*Rm))/2,wax:s(lam-Ls)>0,tilt:ang(sv),north:ang(V(0,90))}}
  /* preview any hour: add ?isiolo=07:30 (or dawn, day, noon, eve, night) before the #; another date: ?day=2026-12-11 */
  const q=new URLSearchParams(location.search).get('isiolo'),pv=/^(\d{1,2}):(\d{2})$/.exec({dawn:'06:25',day:'10:00',noon:'12:15',eve:'18:00',night:'22:00'}[q]||q||'');
  const dq=/^\d{4}-\d\d-\d\d$/.exec(new URLSearchParams(location.search).get('day')||''),DS=dq?(Date.parse(dq[0])/864e5-Math.floor((Date.now()+108e5)/864e5))*864e5:0;   /* whole days between today in Isiolo and the previewed date */
@@ -1575,23 +1588,26 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
    jp.querySelectorAll('[data-y]').forEach(e=>e.classList.toggle('on',p*100>=+e.dataset.y-2));const end=document.querySelector('.jp-end');if(end)end.classList.toggle('on',p>=.985)}
   if(!still)document.querySelectorAll('.band').forEach(b=>{if(!b.offsetHeight)return;const r=b.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;b.style.setProperty('--py',(((r.top+r.height/2)/innerHeight-.5)*-56).toFixed(1)+'px')});}
  /* the moon on the header: place, size, colour (amber when low, as the real one is), and the lit shape turned the way it faces.
-    It fades in as the sun goes down and is not drawn by day */
+    By day it is pale; as the sun goes down it warms and brightens */
  let mkey='',mfor=null,mrk='',mrc=[];
- function mdraw(tm,s,W,yh,ph){const m=moon(tm),S=R.style,x=Math.cos(m.alt*rad)*Math.sin(m.az),md=(W<700?.8:1)*(60-12*cl(m.alt/22)),cx=W*(50+45*x)/100,cy=yh-(yh-46)*Math.max(-.25,Math.min(1,m.alt/m.top));
-  let o=cl((4-s.alt)/10)*cl((m.alt+2.5)/2.5)*cl(m.k/.004);
+ function mdraw(tm,s,W,yh,ph){const m=moon(tm),S=R.style,x=Math.cos(m.alt*rad)*Math.sin(m.az),md=(W<700?.8:1)*(76-28*cl(m.alt/22)),cx=W*(50+45*x)/100,cy=yh-(yh-46)*Math.max(-.25,Math.min(1,m.alt/m.top));
+  /* nt: 0 by day, 1 at night. By day the moon is pale: under 5% lit it cannot be seen, by 20% it is plain; low in the haze it fades */
+  const nt=cl((4-s.alt)/10),pale=.9*cl((m.k-.05)/.15)*cl((m.alt-1)/7);let o=(pale+(1-pale)*nt)*cl((m.alt+2.5)/2.5)*cl((m.k-.01)/.01);
   /* the words come first: where the moon passes behind a line of the heading it dims, as if behind thin cloud. The lines are measured again only when the header changes */
   if(o>0){const rk=W+'x'+ph.offsetHeight+R.lang+ph.textContent.length;if(ph!==mfor||rk!==mrk){mfor=ph;mrk=rk;mrc=[];const b=ph.getBoundingClientRect(),rg=document.createRange();
     ph.querySelectorAll('h1,.lead,.eyebrow,button.it-chip').forEach(e=>{rg.selectNodeContents(e);for(const r of (e.tagName==='BUTTON'?[e.getBoundingClientRect()]:rg.getClientRects()))if(r.width>2)mrc.push([r.left-b.left,r.top-b.top,r.right-b.left,r.bottom-b.top])})}
-   let near=1e9;for(const r of mrc)near=Math.min(near,Math.hypot(Math.max(r[0]-cx,0,cx-r[2]),Math.max(r[1]-cy,0,cy-r[3]))-md/2);o*=.32+.68*cl(near/14)}
+   let near=1e9;for(const r of mrc)near=Math.min(near,Math.hypot(Math.max(r[0]-cx,0,cx-r[2]),Math.max(r[1]-cy,0,cy-r[3]))-md/2);if(R.classList.contains('dk'))o*=.32+.68*cl(near/14)}
   S.setProperty('--mx',(50+45*x).toFixed(2)+'%');S.setProperty('--my',cy.toFixed(1)+'px');
-  S.setProperty('--md',md.toFixed(1)+'px');S.setProperty('--mo',o.toFixed(3));S.setProperty('--mh',cl(m.alt/16).toFixed(3));S.setProperty('--me',(.06*cl((.45-m.k)/.35)).toFixed(3));
-  R.classList.toggle('moon-on',s.alt<-1&&m.alt>0&&m.k>.004);R.classList.toggle('moon-right',x>.3);
+  S.setProperty('--md',md.toFixed(1)+'px');S.setProperty('--mo',o.toFixed(3));S.setProperty('--mh',(1-(1-cl(m.alt/16))*nt).toFixed(3));S.setProperty('--me',(.06*nt*cl((.45-m.k)/.35)).toFixed(3));S.setProperty('--mn',nt.toFixed(3));R.classList.toggle('moon-day',nt<.5);
+  R.classList.toggle('moon-on',s.alt<-1&&m.alt>0&&m.k>.01);R.classList.toggle('moon-right',x>.3);
   /* the little note beside the moon never sits on the heading: if it would, it waits for a hover */
   const hx=x>.3?cx-md/2-150:cx+md/2+8;R.classList.toggle('moon-near',mrc.some(r=>r[0]<hx+142&&r[2]>hx&&r[1]<cy+16&&r[3]>cy-16));
-  const rx=(40*Math.abs(1-2*m.k)).toFixed(1),key=rx+(m.k<.5)+Math.round(m.tilt)+'n'+Math.round(m.north)+m.flip;if(key===mkey)return;mkey=key;
+  /* by day the picture folds the whole sky onto one view, so the disc is turned as one piece to suit it: the lit side then faces the sun as drawn. No turn at night */
+  const tr=Math.sin(m.tilt*rad),tc=Math.cos(m.tilt*rad),tp=Math.atan2(.45*W*(Math.cos(m.az)*tr-Math.sin(m.alt*rad)*Math.sin(m.az)*tc),(yh-46)/(m.top*rad)*tc)/rad,turn=(1-nt)*(((tp-m.tilt)%360+540)%360-180);m.tilt+=turn;m.north+=turn;
+  const rx=(40*Math.abs(1-2*m.k)).toFixed(1),key=rx+(m.k<.5)+Math.round(m.tilt)+'n'+Math.round(m.north);if(key===mkey)return;mkey=key;
   const d='M0-40A40 40 0 0 1 0 40A'+rx+' 40 0 0 '+(m.k<.5?0:1)+' 0-40Z';
   document.querySelectorAll('.mn-lit').forEach(p=>{p.setAttribute('d',d);p.setAttribute('transform','rotate('+(m.tilt-90).toFixed(1)+')')});
-  document.querySelectorAll('.mn-face').forEach(g=>g.setAttribute('transform','rotate('+m.north.toFixed(1)+')'+(m.flip?' scale(-1 1)':'')))}
+  document.querySelectorAll('.mn-face').forEach(g=>g.setAttribute('transform','rotate('+m.north.toFixed(1)+')'))}
  /* when the moon next rises (or sets, if it is up): looks ahead a little over a day */
  function mnext(t,up){let p=moon(t).alt+.83;for(let i=1;i<=390;i++){const x=moon(t+i*24e4).alt+.83;if((x>0)!==up)return t+(i-1+p/(p-x))*24e4;p=x}return 0}
  /* tap the time label: a slider through the day, the same time on the Swahili clock, and a way back to now */
@@ -1603,11 +1619,12 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
  const rng=scr.querySelector('input'),PG={alfajiri:'at dawn',asubuhi:'in the morning',mchana:'in the afternoon',jioni:'in the evening',usiku:'at night'};
  /* fills the panel for a minute of the day: the clock time, how it is said in Kiswahili, a word-for-word gloss, and why the number differs */
  function panel(m){const h=Math.floor(m/60),mm=m%60,sh=((h+6)%12)||12,day=h>=7&&h<=18,q=id=>scr.querySelector(id);
-  q('#it-en').textContent=clock(T0);q('#it-sw').textContent=swt(m);
+  const dt=new Date(T0+108e5);q('#it-en').textContent=clock(T0)+', '+['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][dt.getUTCDay()]+' '+dt.getUTCDate()+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][dt.getUTCMonth()];q('#it-sw').textContent=swt(m);
   const a=sun(T0),D=['north','north-north-east','north-east','east-north-east','east','east-south-east','south-east','south-south-east','south','south-south-west','south-west','west-south-west','west','west-north-west','north-west','north-north-west'];
   q('#it-where').textContent=a.alt>0?'The sun is '+Math.round(a.alt)+'\u00b0 above the horizon, in the '+D[Math.round((((180+a.az/rad)%360)+360)%360/22.5)%16]+'.':a.alt>-6?'The sun is just below the horizon.':'The sun is down.';
-  const mo=moon(T0),up=mo.alt>-.83,nx=mnext(T0,up),lit=Math.round(mo.k*100)+'% lit',nm=mo.k<.01?'new':mo.k>.99?'full':Math.abs(mo.k-.5)<.05?(mo.wax?'at first quarter':'at last quarter'):'a '+(mo.wax?'waxing ':'waning ')+(mo.k<.5?'crescent':'gibbous');
-  q('#it-moon').textContent=(up&&a.alt<4?'The moon is '+nm+', '+lit+', '+Math.max(0,Math.round(mo.alt))+'\u00b0 above the horizon in the '+D[Math.round((((180+mo.az/rad)%360)+360)%360/22.5)%16]+'.':(up?'The moon is up as well. It is ':'The moon is down. It is ')+nm+', '+lit+'.')+(nx?' It '+(up?'sets':'rises')+' at '+clock(nx)+'.':'');
+  const mo=moon(T0),up=mo.alt>-.83,nx=mnext(T0,up),lit=Math.round(mo.k*100)+'% lit',nm=mo.k<.01?'new':mo.k>.99?'full':Math.abs(mo.k-.5)<.05?(mo.wax?'at first quarter':'at last quarter'):(mo.k<.5?'a ':'')+(mo.wax?'waxing ':'waning ')+(mo.k<.5?'crescent':'gibbous');
+  const v3=o=>[Math.cos(o.alt*rad)*Math.sin(o.az),Math.cos(o.alt*rad)*Math.cos(o.az),Math.sin(o.alt*rad)],pm=v3(mo),ps=v3(a),ecl=a.alt>0&&Math.acos(Math.min(1,pm[0]*ps[0]+pm[1]*ps[1]+pm[2]*ps[2]))/rad<.42;
+  q('#it-moon').textContent=ecl?'The moon is passing in front of the sun: an eclipse of the sun, seen from Isiolo. Never look at the sun without eclipse glasses.':(up?'The moon is '+nm+', '+lit+(mo.alt>=80?', almost overhead.':', '+Math.max(0,Math.round(mo.alt))+'\u00b0 above the horizon in the '+D[Math.round((((180+mo.az/rad)%360)+360)%360/22.5)%16]+'.')+(mo.k<.01?' A new moon cannot be seen.':a.alt>=4&&mo.k<.05?' It is too thin to see in daylight.':''):'The moon is down. It is '+nm+', '+lit+'.')+(nx?' It '+(up?'sets':'rises')+' at '+clock(nx+3e4)+'.':'');
   q('#it-gl').textContent='Word for word: hour '+sh+(mm===0?'':mm===15?' and a quarter':mm===30?' and a half':' and '+mm+(mm===1?' minute':' minutes'))+', '+PG[part(h)]+'.';
   q('#it-why').textContent=day?'Kiswahili counts the hours from sunrise, about 6 am. So '+((h+11)%12+1)+(h<12?' am':' pm')+' is hour '+sh+'. Clocks and phones in Kenya show the usual time; this is how it is said.'
    :'Kiswahili counts the hours from sunrise, and starts again at sunset, about 6 pm. So '+((h+11)%12+1)+(h<12?' am':' pm')+' is hour '+sh+'. Clocks and phones in Kenya show the usual time; this is how it is said.';rng.setAttribute('aria-valuetext',clock(T0)+'. '+swt(m))}
