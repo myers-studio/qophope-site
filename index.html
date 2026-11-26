@@ -843,6 +843,32 @@ html.mapfull,html.mapfull body{overflow:hidden}
 .ic2.pic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.14)}
 @media (prefers-reduced-motion:reduce){.mk.go path{animation:none!important;stroke-dashoffset:0}}
 </style>
+<style id="chrome-v1">
+/* phones and tablets: a slimmer top bar that shrinks again once you scroll, and no bar fixed to the bottom of the screen */
+button{color:inherit}
+/* wide screens: a little slimmer, and the small line under the name tucks away once you scroll */
+@media (min-width:901px){header .wrap{padding-block:10px}header.scrolled .wrap{padding-block:6px}.mark{transition:width .25s,height .25s}header.scrolled .mark{width:36px;height:36px}
+ .logo small{display:block;max-height:18px;overflow:hidden;transition:max-height .25s,opacity .2s}header.scrolled .logo small{max-height:0;opacity:0}}
+@media (max-width:900px){
+ header .wrap{padding-block:8px;gap:10px}
+ header.scrolled .wrap{padding-block:5px}
+ .mark{width:34px;height:34px;transition:width .25s,height .25s}
+ header.scrolled .mark{width:28px;height:28px}
+ .logo{gap:9px}
+ .logo b{font-size:16.5px;line-height:1.1;white-space:nowrap}.logo b br{display:none}
+ .logo small{display:block;font-size:9.5px;line-height:1.35;max-height:14px;overflow:hidden;transition:max-height .25s,opacity .2s}
+ header.scrolled .logo small{max-height:0;opacity:0}
+ .menu{color:var(--ink);padding:6px 13px;font-size:14.5px;-webkit-appearance:none;appearance:none}
+ /* the give strip now closes each page, above the footer, instead of following the reader */
+ .givebar{position:static;z-index:auto;background:#f4ede2;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:1px solid var(--line);padding:18px 20px;font-size:15px;font-weight:600}
+ /* not on Home or Sponsor: those pages already end on a Sponsor button */
+ body:has(#p-home.active) .givebar,body:has(#p-sponsor.active) .givebar{display:none}
+ body{padding-bottom:0}
+ #totop{bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:700px){.hero-pause{bottom:16px}.hero .credit{bottom:20px}.dots{bottom:72px}}
+@media (max-width:350px){.logo b{white-space:normal}}
+</style>
 </head>
 <body data-font="fraunces" data-bg="none">
 <div class="bg" aria-hidden="true"></div>
@@ -851,7 +877,7 @@ html.mapfull,html.mapfull body{overflow:hidden}
 
 <header>
   <div class="wrap">
-    <a class="logo" href="#home" aria-label="QOP Hope Foundation, home"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="var(--sand)" stroke="var(--sun)" stroke-width="1.5"/><circle cx="24" cy="27" r="9" fill="var(--gold)"/><path d="M6 33h36" stroke="var(--sun)" stroke-width="2" stroke-linecap="round"/><path d="M15 33c0-5 3-7 9-8 6 1 9 3 9 8" fill="none" stroke="var(--acacia)" stroke-width="0"/><path d="M24 33V22M17 21c3-2 11-2 14 0" stroke="var(--acacia)" stroke-width="2.4" stroke-linecap="round" fill="none"/><ellipse cx="24" cy="19.5" rx="10" ry="3.2" fill="var(--acacia)"/></svg><span><b>QOP Hope<br>Foundation</b><small>Queen of Peace · Isiolo</small></span></a>
+    <a class="logo" href="#home" aria-label="QOP Hope Foundation, home"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="var(--sand)" stroke="var(--sun)" stroke-width="1.5"/><circle cx="24" cy="27" r="9" fill="var(--gold)"/><path d="M6 33h36" stroke="var(--sun)" stroke-width="2" stroke-linecap="round"/><path d="M15 33c0-5 3-7 9-8 6 1 9 3 9 8" fill="none" stroke="var(--acacia)" stroke-width="0"/><path d="M24 33V22M17 21c3-2 11-2 14 0" stroke="var(--acacia)" stroke-width="2.4" stroke-linecap="round" fill="none"/><ellipse cx="24" cy="19.5" rx="10" ry="3.2" fill="var(--acacia)"/></svg><span><b>QOP Hope <br>Foundation</b><small>Queen of Peace · Isiolo</small></span></a>
     <nav id="nav"><button class="menu" id="menubtn" aria-expanded="false">Menu</button>
       <ul>
         <li><a href="#home" data-p="home">Home</a></li>
@@ -1079,9 +1105,10 @@ html.mapfull,html.mapfull body{overflow:hidden}
   </div><div class="wrap"></div></section>
 </div>
 </main>
-<div class="givebar"><span>Help a child reach school</span><a class="btn btn-sun" href="#sponsor">Give</a></div>
+
 
 <div class="kanga" aria-hidden="true"></div>
+<div class="givebar"><span>Help a child reach school</span><a class="btn btn-sun" href="#sponsor">Give</a></div>
 <footer>
   <div class="wrap">
     <div class="cols">
@@ -1123,7 +1150,7 @@ function observe(){document.querySelectorAll('.page.active .reveal:not(.in), .pa
 observe();addEventListener('hashchange',()=>setTimeout(observe,50));
 /* header shrink + scroll progress + hero parallax */
 const hdr=document.querySelector('header'),sbar=document.getElementById('sbar'),heroImg=document.querySelector('.hero .slides');
-addEventListener('scroll',()=>{const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;hdr.classList.toggle('scrolled',y>20);sbar.style.width=(h>0?100*y/h:0)+'%';
+addEventListener('scroll',()=>{const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;if(y>48)hdr.classList.add('scrolled');else if(y<8)hdr.classList.remove('scrolled');sbar.style.width=(h>0?100*y/h:0)+'%';
   if(heroImg&&!reduce&&y<900)heroImg.style.translate='0 '+(y*0.25)+'px';},{passive:true});
 /* subtle 3D tilt on programme cards */
 if(!reduce&&matchMedia('(hover:hover)').matches)document.querySelectorAll('.card').forEach(c=>{
