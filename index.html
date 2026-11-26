@@ -1105,6 +1105,7 @@ html.saver footer{background:#1d2528!important}
 .moon-on .moon-hint{display:block}
 .moon-right .moon-hint{transform:translate(calc(-100% - var(--md,50px)/2 - 12px),-50%)}
 .moon-hint.on{opacity:1}
+.moon-near .moon-hint.on{opacity:0}
 @media (hover:hover){.moon-grab:hover~.moon-hint{opacity:1}}
 @media (prefers-reduced-motion:reduce){.moon{transition:none}}
 </style>
@@ -1585,6 +1586,8 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
   S.setProperty('--mx',(50+45*x).toFixed(2)+'%');S.setProperty('--my',cy.toFixed(1)+'px');
   S.setProperty('--md',md.toFixed(1)+'px');S.setProperty('--mo',o.toFixed(3));S.setProperty('--mh',cl(m.alt/16).toFixed(3));S.setProperty('--me',(.06*cl((.45-m.k)/.35)).toFixed(3));
   R.classList.toggle('moon-on',s.alt<-1&&m.alt>0&&m.k>.004);R.classList.toggle('moon-right',x>.3);
+  /* the little note beside the moon never sits on the heading: if it would, it waits for a hover */
+  const hx=x>.3?cx-md/2-150:cx+md/2+8;R.classList.toggle('moon-near',mrc.some(r=>r[0]<hx+142&&r[2]>hx&&r[1]<cy+16&&r[3]>cy-16));
   const rx=(40*Math.abs(1-2*m.k)).toFixed(1),key=rx+(m.k<.5)+Math.round(m.tilt)+'n'+Math.round(m.north)+m.flip;if(key===mkey)return;mkey=key;
   const d='M0-40A40 40 0 0 1 0 40A'+rx+' 40 0 0 '+(m.k<.5?0:1)+' 0-40Z';
   document.querySelectorAll('.mn-lit').forEach(p=>{p.setAttribute('d',d);p.setAttribute('transform','rotate('+(m.tilt-90).toFixed(1)+')')});
