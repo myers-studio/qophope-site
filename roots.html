@@ -843,6 +843,214 @@ html.mapfull,html.mapfull body{overflow:hidden}
 .ic2.pic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.14)}
 @media (prefers-reduced-motion:reduce){.mk.go path{animation:none!important;stroke-dashoffset:0}}
 </style>
+<style id="chrome-v1">
+/* phones and tablets: a slimmer top bar that shrinks again once you scroll, and no bar fixed to the bottom of the screen */
+button{color:inherit}
+/* wide screens: a little slimmer, and the small line under the name tucks away once you scroll */
+@media (min-width:901px){header .wrap{padding-block:10px}header.scrolled .wrap{padding-block:6px}.mark{transition:width .25s,height .25s}header.scrolled .mark{width:36px;height:36px}
+ .logo small{display:block;max-height:18px;overflow:hidden;transition:max-height .25s,opacity .2s}header.scrolled .logo small{max-height:0;opacity:0}}
+@media (max-width:900px){
+ header .wrap{padding-block:8px;gap:10px}
+ header.scrolled .wrap{padding-block:5px}
+ .mark{width:34px;height:34px;transition:width .25s,height .25s}
+ header.scrolled .mark{width:28px;height:28px}
+ .logo{gap:9px}
+ .logo b{font-size:16.5px;line-height:1.1;white-space:nowrap}.logo b br{display:none}
+ .logo small{display:block;font-size:9.5px;line-height:1.35;max-height:14px;overflow:hidden;transition:max-height .25s,opacity .2s}
+ header.scrolled .logo small{max-height:0;opacity:0}
+ .menu{color:var(--ink);padding:6px 13px;font-size:14.5px;-webkit-appearance:none;appearance:none}
+ /* the give strip now closes each page, above the footer, instead of following the reader */
+ .givebar{position:static;z-index:auto;background:#f4ede2;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:1px solid var(--line);padding:18px 20px;font-size:15px;font-weight:600}
+ /* not on Home or Sponsor: those pages already end on a Sponsor button */
+ body:has(#p-home.active) .givebar,body:has(#p-sponsor.active) .givebar{display:none}
+ body{padding-bottom:0}
+ #totop{bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:700px){.hero-pause{bottom:16px}.hero .credit{bottom:20px}.dots{bottom:72px}}
+@media (max-width:350px){.logo b{white-space:normal}}
+</style>
+<style id="sky-v2">
+/* more sky above and more ground below, so the whole sunset plays while the header is still on screen */
+.pagehead{padding-block:128px 264px!important}
+@media (max-width:700px){.pagehead{padding-block:84px 214px!important}}
+/* the time label is a button: tap it to move through the day in Isiolo, or to come back to now */
+button.it-chip{cursor:pointer;-webkit-appearance:none;appearance:none;font:600 12.5px var(--body)}
+button.it-chip::after{content:"";width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:2px;opacity:.6;transition:transform .2s}
+button.it-chip[aria-expanded=true]::after{transform:rotate(225deg) translateY(-1px)}
+.it-scrub{width:min(420px,100%);margin:-6px 0 18px;padding:14px 16px 12px;border-radius:16px;background:#fffffff2;border:1px solid #e4d9c8;box-shadow:0 16px 34px -20px #1d2528aa;color:var(--ink);text-align:left}
+.it-scrub[hidden]{display:none}
+.it-scrub input{display:block;width:100%;margin:0;height:22px;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+.it-scrub input::-webkit-slider-runnable-track{height:10px;border-radius:6px;background:linear-gradient(90deg,#161d3c 0%,#161d3c 21%,#e9763f 25.5%,#f6d58a 30%,#cfe6f3 38%,#cfe6f3 64%,#f6c453 71%,#e2562f 76%,#3a2a48 80%,#161d3c 86%,#161d3c 100%)}
+.it-scrub input::-moz-range-track{height:10px;border-radius:6px;background:linear-gradient(90deg,#161d3c 0%,#161d3c 21%,#e9763f 25.5%,#f6d58a 30%,#cfe6f3 38%,#cfe6f3 64%,#f6c453 71%,#e2562f 76%,#3a2a48 80%,#161d3c 86%,#161d3c 100%)}
+.it-scrub input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-6px;border-radius:50%;background:#fff;border:2px solid var(--ink);box-shadow:0 2px 6px #0004}
+.it-scrub input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--ink)}
+.it-ticks{display:flex;justify-content:space-between;font:600 10.5px var(--body);letter-spacing:.04em;color:var(--muted);margin-top:4px}
+.it-swl{margin:12px 0 0;font:600 17px var(--display);color:var(--sun-ink)}
+.it-swl small{display:block;font:400 12.5px var(--body);color:var(--muted);margin-top:2px}
+.it-now{margin-top:12px;font:600 13px var(--body);border:0;border-radius:50px;padding:8px 14px;background:var(--ink);color:#fff;cursor:pointer}
+/* during the drop-in the drawn borders are hidden: stretched by the zoom they turned into a large blur. They fade back in on landing */
+#topo .leaflet-overlay-pane{transition:opacity .5s}
+#topo.flying .leaflet-overlay-pane{opacity:0;transition:none}
+</style>
+<script>/* data saver: decided before anything is drawn, so held-back pictures are never fetched */
+var qopT=function(s){return s};   /* stands in until the Kiswahili switch loads */
+try{var qs=localStorage.getItem('qopSaver');if(qs==='1'||(qs!=='0'&&navigator.connection&&navigator.connection.saveData))document.documentElement.classList.add('saver')}catch(e){}
+</script>
+<style id="roots-v1">
+/* ===== C greeting by the hour in Isiolo ===== */
+.hero-hi{margin:0 0 14px;color:#fff;text-shadow:0 1px 10px #000a;font:500 15.5px var(--body)}
+.hero-hi b{font:600 19px var(--display);letter-spacing:-.01em;margin-right:8px}
+@media (max-width:700px){.hero-hi b{display:block;margin:0 0 2px}}
+/* shared */
+.rt-box{background:#fff;border:1px solid #ece4d8;border-radius:18px;box-shadow:0 20px 44px -30px #3a2a1a80}
+.seg{display:inline-flex;background:#efe6d8;border-radius:50px;padding:4px;gap:2px}
+.seg button{white-space:nowrap;font:600 13px var(--body);border:0;background:transparent;color:var(--ink);padding:8px 16px;border-radius:50px;cursor:pointer;transition:background .2s,color .2s}
+.seg button[aria-selected=true],.seg button[aria-pressed=true]{background:#fff;color:var(--sun-ink);box-shadow:0 4px 10px -6px #1d252880}
+/* ===== L meet the place ===== */
+.pl{display:grid;grid-auto-flow:column;grid-auto-columns:min(78%,360px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 16px;margin-top:40px;scrollbar-width:thin}
+.pl figure{margin:0;scroll-snap-align:start;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#1d2528}
+.pl img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.pl figure:hover img{transform:scale(1.05)}
+.pl figcaption{position:absolute;inset:auto 0 0 0;padding:48px 18px 18px;color:#fff;background:linear-gradient(180deg,transparent,#141a1ce6)}
+.pl figcaption b{display:block;font:600 21px var(--display);letter-spacing:-.012em}
+.pl-load{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);font:600 14px var(--body);color:#fff;background:#ffffff1f;border:1px solid #ffffff59;border-radius:50px;padding:10px 18px;cursor:pointer}
+.pl figcaption span{display:block;font-size:14.5px;line-height:1.45;color:#e9dfd0;margin-top:4px}
+/* ===== F proverb ===== */
+.rt-methali{margin:44px 0 0;border-radius:18px;background:#1d2528;color:#fff;text-align:center;padding:clamp(40px,7vw,76px) 22px}
+.rt-methali blockquote{margin:0;font:600 clamp(26px,4.6vw,48px)/1.1 var(--display);letter-spacing:-.022em;color:#fff6e6}
+.rt-methali figcaption{margin-top:16px;font-size:16px;color:#d5cbbb}
+.rt-methali .mk path{stroke:#e9b65a}
+/* ===== H the school year and the rains ===== */
+.yr{padding:clamp(18px,3.4vw,32px);margin-top:36px}
+.yr-months{display:flex;font:600 11px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.yr-months span{text-align:center}
+.yr-lab{font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:16px 0 6px}
+.yr-track{position:relative;height:38px;border-radius:9px;background:#f4ede2}
+.yr-track.r{height:28px}
+.yr-bar{position:absolute;top:0;bottom:0;border-radius:9px;display:grid;place-items:center;font:600 12.5px var(--body);color:#fff;background:var(--sun);white-space:nowrap;overflow:hidden;transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1) .15s}
+.yr-track.r .yr-bar{background:#4f8fb8;font-size:11.5px}
+.yr-bar.h{background:transparent;color:var(--muted);font-weight:500;font-size:11px}
+.yr.in .yr-bar{transform:none}
+.yr-wrap{position:relative}
+.yr-now{position:absolute;top:18px;bottom:-4px;width:2px;background:var(--ink);border-radius:2px;pointer-events:none}
+.yr-now::before{content:"Today";position:absolute;top:-22px;left:50%;transform:translateX(-50%);font:700 10px var(--body);letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:50px;padding:4px 8px;white-space:nowrap}
+.yr-dates{margin:16px 0 0;font-size:14px;color:var(--muted)}
+/* ===== I the school ladder ===== */
+.ld{display:grid;gap:10px;padding:clamp(18px,3.4vw,32px);margin-top:36px}
+.ld-step{display:grid;grid-template-columns:160px 1fr auto;gap:16px;align-items:center;border-radius:14px;background:#fbf8f3;border:1px solid #ece4d8;padding:14px 18px}
+.ld-step:nth-child(2){margin-left:4%}.ld-step:nth-child(3){margin-left:8%}.ld-step:nth-child(4){margin-left:12%}
+.ld-step b{font:600 18px var(--display)}.ld-step span{color:var(--muted);font-size:14.5px}
+.ld-step em{font:600 11px var(--body);font-style:normal;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+/* ===== D giving, the way Kenyans pay ===== */
+.mp{display:grid;grid-template-columns:1.15fr 1fr;overflow:hidden;margin-top:18px}
+.mp-l{padding:clamp(20px,3.4vw,34px)}
+.mp-steps{list-style:none;margin:20px 0 0;padding:0;display:none;gap:10px;counter-reset:s}
+.mp-steps.on{display:grid}
+.mp-steps li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15.5px;line-height:1.5}
+.mp-steps li::before{content:counter(s);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acacia-soft);color:#2f5230;font:700 12.5px var(--body)}
+.mp-steps b{font-weight:600}
+.mp-r{background:#1d2528;color:#fff;padding:clamp(20px,3.4vw,34px);display:grid;gap:12px;align-content:center;justify-items:start}
+.mp-k{margin:0;font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:#c9d3d6}
+.mp-big{margin:0;font:700 clamp(28px,4.4vw,42px)/1.1 var(--display);color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.mp-note{margin:0;font-size:14.5px;line-height:1.5;color:#e9dfd0}
+/* ===== E contact, J registration, G peace: shown only when the Foundation's real details are filled in ===== */
+.rt-contact .wa-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.wa-b{display:inline-flex;align-items:center;gap:9px;font:600 15px var(--body);border-radius:50px;padding:11px 19px;text-decoration:none}
+.wa-b svg{width:18px;height:18px}.wa-b.g{background:#1f7a4d;color:#fff}.wa-b.l{color:var(--ink);box-shadow:inset 0 0 0 1.5px currentColor}
+.rt-peace{text-align:center;padding:clamp(34px,6vw,64px) 22px}
+.rt-peace b{display:block;font:700 clamp(54px,11vw,120px)/1 var(--display);letter-spacing:-.035em;color:var(--sun);transition:opacity .45s}
+.rt-peace span{display:block;margin-top:10px;font:600 13px var(--body);letter-spacing:.14em;text-transform:uppercase}
+/* ===== K data saver ===== */
+.saver-btn{font:600 13px var(--body);background:none;border:1px solid #ffffff40;color:inherit;border-radius:50px;padding:6px 13px;cursor:pointer}
+.saver-btn[aria-pressed=true]{background:#ffffff1f}
+html.saver .band::before{background-image:none!important;background:#232a2c!important}
+html.saver .pagehead .dusk,html.saver .ct{background-image:none!important}
+html.saver .hero-cloud,html.saver .dots,html.saver .hero-pause{display:none}
+html.saver .hero .slides{animation:none}
+.map-load{position:absolute;inset:0;display:grid;place-content:center;gap:6px;justify-items:center;width:100%;border:0;background:#232a2c;color:#fff;font:600 16px var(--body);cursor:pointer;border-radius:12px}
+.map-load small{font:400 13px var(--body);color:#c9d3d6}
+@media (max-width:820px){.yr-bar.h{font-size:0}.mp{grid-template-columns:1fr}.ld-step{grid-template-columns:1fr;gap:3px;margin-left:0!important}.yr-months{font-size:9px;letter-spacing:0}.yr-bar{font-size:11px}.seg button{padding:8px 12px;font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.yr-bar{transition:none}.pl img{transition:none}}
+</style>
+<style id="sun-v1">
+/* shadows of the trees and rocks: each is the object's outline laid on the ground, away from the sun, longer when the sun is low */
+.shade{position:absolute;left:50%;bottom:0;width:var(--iw,100%);aspect-ratio:1792/768;transform:translateX(-50%);z-index:-2;pointer-events:none;opacity:var(--sho,0);mix-blend-mode:multiply;filter:blur(1.6px)}
+.shade i{position:absolute;display:block;transform-origin:var(--ox,50%) 100%;transform:matrix(1,0,var(--shx,0),var(--shy,-.2),0,0)}
+.shade i.r{background:#2a170d;border-radius:50%}
+.shade i.t::before{content:"";position:absolute;left:0;top:0;width:100%;height:var(--c);border-radius:50%;background:#2a170d}
+.shade i.t::after{content:"";position:absolute;left:calc(var(--ox) - .9%);width:1.8%;min-width:3px;top:calc(var(--c)/2);bottom:0;background:#2a170d}
+/* the sun can be dragged: an invisible handle sits over it, above the text */
+.sun-grab{position:absolute;left:var(--sx,50%);top:var(--sy,60px);width:calc(var(--sd,60px) + 26px);height:calc(var(--sd,60px) + 26px);margin:calc((var(--sd,60px) + 26px)/-2) 0 0 calc((var(--sd,60px) + 26px)/-2);border-radius:50%;border:0;padding:0;background:transparent;cursor:grab;z-index:2;touch-action:none;-webkit-tap-highlight-color:transparent}
+.sun-grab:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px #1d252866}
+.sun-drag,.sun-drag *{cursor:grabbing!important;user-select:none;-webkit-user-select:none}
+.sun-down .sun-grab,.sun-down .sun-hint{display:none}
+.pagehead .it-chip,.pagehead .it-scrub{position:relative;z-index:3}
+.sun-hint{position:absolute;left:var(--sx,50%);top:var(--sy,60px);transform:translate(calc(var(--sd,60px)/2 + 12px),-50%);z-index:2;pointer-events:none;font:600 12px var(--body);color:#fff;background:#1d2528cc;border-radius:50px;padding:6px 11px;white-space:nowrap;opacity:0;transition:opacity .5s}
+.sun-right .sun-hint{transform:translate(calc(-100% - var(--sd,60px)/2 - 12px),-50%)}
+.sun-hint.on{opacity:1}
+/* the time panel, in plain steps */
+.it-two{display:grid;gap:10px;margin:14px 0 0}
+.it-two div{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline}
+.it-two dt{font:600 10.5px var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.it-two dd{margin:0;font:600 17px var(--display);color:var(--ink)}
+.it-two dd[lang=sw]{color:var(--sun-ink)}
+.it-two dd.it-gl{grid-column:2;font:400 13px var(--body);color:var(--muted);margin-top:-6px}
+.it-why{margin:12px 0 0;padding-top:10px;border-top:1px solid #efe6d8;font-size:13px;line-height:1.5;color:var(--ink)}
+.it-tip{margin:10px 0 0;font-size:12.5px;color:var(--muted)}
+@media (max-width:520px){.it-two div{grid-template-columns:1fr;gap:2px}.it-two dd.it-gl{grid-column:1;margin-top:0}}
+</style>
+<style id="polish-v1">
+/* the time panel away from a sky header (home page): no slider, a link to the sky instead */
+.it-scrub.lite input,.it-scrub.lite .it-ticks,.it-scrub.lite .it-tip,.it-scrub.lite .it-now{display:none}
+.it-see{display:none;margin-top:12px;font-size:14px;padding:9px 16px}
+.it-scrub.lite .it-see{display:inline-block}
+.band .it-scrub{margin:14px 0 0}
+.it-where{margin:10px 0 0;font:600 13.5px var(--body);color:var(--ink)}
+/* every button answers the pointer */
+.menu,.seg button,.saver-btn,.it-now,.map-full,.hero-pause,.pl-load,.topo-replay,.map-load{transition:transform .15s,background-color .2s,box-shadow .2s,color .2s}
+.pagehead .it-chip,.band .it-chip{transition:transform .15s,box-shadow .2s,color .5s,background-color .5s,border-color .5s}
+@media (hover:hover){
+ .menu:hover{background:var(--sand-2);transform:translateY(-1px);box-shadow:0 6px 14px -9px #1d252880}
+ button.it-chip:hover{transform:translateY(-1px);box-shadow:0 8px 16px -9px #1d252899}
+ .seg button:hover{background:#ffffff99}
+ .saver-btn:hover{background:#ffffff26}
+ .it-now:hover{background:#000;transform:translateY(-1px)}
+ .pl-load:hover{background:#ffffff47}
+ .map-load:hover{background:#2c3537}
+ .sun-grab:hover~.sun-hint{opacity:1}
+}
+.menu:active,button.it-chip:active,.seg button:active,.saver-btn:active,.it-now:active,.map-full:active,.hero-pause:active,.pl-load:active{transform:scale(.97)}
+/* tracking rows: painted pictures in place of the flat icons */
+.trk-m i.pic{width:78px;height:78px;overflow:hidden;background:#f6efe4!important;box-shadow:inset 0 0 0 1px rgba(29,37,40,.06),0 8px 18px -12px rgba(29,37,40,.45)}
+.trk-m i.pic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.2)}
+@media (max-width:820px){.trk-m i.pic{width:64px;height:64px}}
+</style>
+<style id="pics-v1">
+.pil-ic.pic{width:98px;height:98px;overflow:hidden;background:#f6efe4!important;box-shadow:inset 0 0 0 1px rgba(29,37,40,.06),0 10px 22px -12px rgba(29,37,40,.45)}
+.pil-ic.pic img,.fs i.pic img,.jp-dot img{width:100%;height:100%;object-fit:cover;display:block}
+.pil-ic.pic img{transform:scale(1.16)}
+.fs i.pic{overflow:hidden;background:#f6efe4!important}.fs i.pic img{transform:scale(1.2)}
+.jp-dot{overflow:hidden}.jp-dot img{transform:scale(1.28)}
+/* Get involved: four compact cards, each with a picture and a next step */
+.inv-list{display:grid;gap:14px;align-content:start}
+.inv{display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:center;text-decoration:none;color:inherit;padding:16px 18px!important;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s}
+.inv img{width:84px;height:84px;object-fit:cover;border-radius:58% 42% 55% 45%/48% 56% 44% 52%;background:#f6efe4}
+.inv h3{margin:0}.inv p{margin:4px 0 0;color:var(--muted);font-size:15px;line-height:1.45}
+.inv em{display:inline-block;margin-top:8px;font-style:normal;font-weight:600;font-size:14.5px;color:var(--sun-ink)}
+.inv em::after{content:" \2192"}
+@media (hover:hover){.inv:hover{transform:translateY(-3px);box-shadow:0 18px 34px -22px #3a2a1a99}.inv:hover em{text-decoration:underline}}
+@media (max-width:520px){.inv{grid-template-columns:64px 1fr;gap:12px}.inv img{width:64px;height:64px}}
+</style>
+<style id="i18n-v1">
+.lang-sw{display:inline-flex;background:#efe6d8;border-radius:50px;padding:3px;gap:2px;vertical-align:middle}
+.lang-sw button{font:600 12.5px var(--body);letter-spacing:.04em;border:0;background:transparent;color:var(--ink);padding:6px 11px;border-radius:50px;cursor:pointer;transition:background .2s,color .2s}
+.lang-sw button[aria-pressed=true]{background:#fff;color:var(--sun-ink);box-shadow:0 3px 8px -5px #1d252880}
+@media (hover:hover){.lang-sw button:hover{background:#ffffff99}}
+.sw-note{display:none;background:var(--gold-soft);color:#5d4208;font-size:13.5px;line-height:1.45;border-bottom:1px solid #ecd9a6}
+.sw-note .wrap{padding-block:9px}
+html.sw .sw-note{display:block}
+html.sw-busy main{opacity:.55;transition:opacity .2s}
+</style>
 <style id="lab">
 body.lab{background:#fbf8f3}
 .lab-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
@@ -878,224 +1086,120 @@ body.lab{background:#fbf8f3}
 
 
 .lab-nav{grid-template-columns:repeat(4,minmax(0,1fr))}
-.lab-nav a em.c{color:var(--sun-ink)}
+.lab-nav a span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.lab-nav a em{font:600 10px var(--body);font-style:normal;letter-spacing:.09em;text-transform:uppercase}
+.lab-nav a em.add{color:var(--acacia)}.lab-nav a em.ref{color:#7a5510}.lab-nav a em.rep{color:var(--sun-ink)}
+.kind{display:inline-block;font:700 10.5px var(--body);letter-spacing:.1em;text-transform:uppercase;border-radius:50px;padding:5px 11px;margin-bottom:10px}
+.kind.add{background:var(--acacia-soft);color:#2f5230}.kind.ref{background:var(--gold-soft);color:#7a5510}.kind.rep{background:var(--sun-soft);color:var(--sun-ink)}
 .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .tg{font:600 11px var(--body);letter-spacing:.07em;text-transform:uppercase;padding:6px 11px;border-radius:50px;background:#fff;border:1px solid #e4d9c8;color:var(--ink)}
-.tg.ok{background:var(--acacia-soft);border-color:#cfe0c8;color:#2f5230}.tg.rv{background:var(--gold-soft);border-color:#ecd9a6;color:#7a5510}.tg.st{background:var(--sun-soft);border-color:#eccabf;color:var(--sun-ink)}
-.src{font-size:13px;color:var(--muted);margin-top:14px;max-width:80ch}.src a{color:inherit}
-.card{background:#fff;border:1px solid #ece4d8;border-radius:18px;box-shadow:0 20px 44px -30px #3a2a1a80}
-.seg{display:inline-flex;background:#efe6d8;border-radius:50px;padding:4px;gap:2px}
-.seg button{white-space:nowrap;font:600 13px var(--body);border:0;background:transparent;color:var(--ink);padding:8px 16px;border-radius:50px;cursor:pointer;transition:background .2s,color .2s}
-.seg button[aria-pressed=true]{background:#fff;color:var(--sun-ink);box-shadow:0 4px 10px -6px #1d252880}
-.draft{display:inline-block;font:600 10.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:#7a5510;background:var(--gold-soft);border-radius:50px;padding:4px 9px;margin-left:8px;vertical-align:middle}
-
-/* A language switch */
-.lg{overflow:hidden}
-.lg-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 20px;border-bottom:1px solid #f0e8dc;flex-wrap:wrap}
-.lg-nav{display:flex;gap:18px;flex-wrap:wrap;font:600 14px var(--body);color:var(--ink)}
-.lg-hero{position:relative;color:#fff;text-align:center;padding:clamp(44px,8vw,90px) 22px;background:#1d2528 url(img/cliffe/two-women-overlook.jpg) center 35%/cover;isolation:isolate}
-.lg-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#1d252866,#1d2528cc)}
-.lg-hero h3{font-size:clamp(28px,5vw,54px);line-height:1.04;letter-spacing:-.026em;color:#fff;margin-top:14px}
-.lg-hero p.l{max-width:52ch;margin:16px auto 0;color:#f1ece6;font-size:17px}
-.lg [data-t]{transition:opacity .28s}.lg.sw-ing [data-t]{opacity:0}
-.lg-cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-
-/* B Swahili clock */
-.sc{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,5vw,56px);align-items:center;padding:clamp(22px,4vw,44px)}
-.sc-dial{position:relative;width:min(250px,64vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fffaf2,#f4ead8);border:1px solid #e4d9c8;box-shadow:inset 0 0 0 10px #fff,0 18px 40px -24px #3a2a1a80}
-.sc-dial b,.sc-dial i{position:absolute;left:50%;top:50%;font-style:normal;transform:translate(-50%,-50%)}
-.sc-dial b{font:700 15px var(--display);color:var(--ink)}
-.sc-dial i{font:700 11.5px var(--body);color:var(--sun-ink)}
-.sc-hand{position:absolute;left:50%;bottom:50%;width:4px;margin-left:-2px;border-radius:3px;background:var(--ink);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.sc-hand.h{height:26%}.sc-hand.m{height:37%;width:3px;margin-left:-1.5px;background:var(--sun)}
-.sc-dial::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--ink)}
-.sc-read{display:grid;gap:14px}
-.sc-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.sc-line small{font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);width:92px}
-.sc-line span{font:600 clamp(20px,3vw,30px) var(--display);letter-spacing:-.015em}
-.sc-line.sw span{color:var(--sun-ink)}
-.sc-key{font-size:13.5px;color:var(--muted)}.sc-key b{color:var(--ink)}.sc-key i{font-style:normal;color:var(--sun-ink);font-weight:700}
-
-/* C greeting */
-.gr{position:relative;border-radius:18px;overflow:hidden;isolation:isolate;padding:clamp(44px,8vw,92px) clamp(22px,5vw,60px) clamp(110px,15vw,170px);background:#f4ede2 url(img/bg-day.jpg) center bottom/cover}
-.gr-d,.gr-n{position:absolute;inset:0;z-index:-2;background:center bottom/cover;opacity:0;transition:opacity 1.2s}
-.gr-d{background-image:url(img/bg-day-dusk.jpg)}.gr-n{background-image:url(img/bg-day-night.jpg)}
-.gr::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#fbf6eef2,#fbf6eee8 56%,#fbf6ee59 80%,#fbf6ee00);transition:opacity 1.2s}
-.gr::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#141a1c4d,#141a1c80 36%,#141a1c7a 62%,#141a1c1f 82%,transparent);opacity:0;transition:opacity 1.2s}
-.gr[data-p=jioni] .gr-d,.gr[data-p=usiku] .gr-d{opacity:1}.gr[data-p=usiku] .gr-n{opacity:1}
-.gr[data-p=jioni]::before,.gr[data-p=usiku]::before{opacity:0}.gr[data-p=jioni]::after,.gr[data-p=usiku]::after{opacity:1}
-.gr h3{font-size:clamp(30px,5.4vw,60px);line-height:1.04;letter-spacing:-.026em;transition:color 1.2s}
-.gr p{font-size:18px;margin-top:10px;transition:color 1.2s;color:#4d5759}
-.gr[data-p=jioni] h3,.gr[data-p=usiku] h3{color:#fff6e6}.gr[data-p=jioni] p,.gr[data-p=usiku] p{color:#efe7dc}
-
-/* D M-Pesa card */
-.mp{display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden}
-.mp-l{padding:clamp(20px,3.6vw,36px)}
-.mp-steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:9px;counter-reset:s}
-.mp-steps li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:center;font-size:15.5px}
-.mp-steps li::before{content:counter(s);flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acacia-soft);color:#2f5230;font:700 12.5px var(--body)}
-.mp-steps b{font-weight:600}
-.mp-r{background:#1d2528;color:#fff;padding:clamp(20px,3.6vw,36px);display:grid;gap:16px;align-content:center}
-.mp-num small{display:block;font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:#c9d3d6}
-.mp-num b{display:block;font:700 clamp(30px,5vw,46px)/1.1 var(--display);font-variant-numeric:tabular-nums;letter-spacing:.04em;color:var(--gold)}
-.mp-copy{justify-self:start;font:600 13px var(--body);color:#1d2528;background:#fff;border:0;border-radius:50px;padding:9px 16px;cursor:pointer}
-.mp-ph{font-size:12.5px;color:#e9c98a}
-.mp-pane{display:none}.mp-pane.on{display:block}
-
-/* E WhatsApp + call */
-.wa{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}
-.wa-card{padding:26px}
-.wa-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.wa-b{display:inline-flex;align-items:center;gap:9px;font:600 15px var(--body);border-radius:50px;padding:12px 20px;border:0;cursor:pointer;text-decoration:none}
-.wa-b svg{width:18px;height:18px}
-.wa-b.g{background:#1f7a4d;color:#fff}.wa-b.l{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px currentColor}
-.wa-meta{margin-top:18px;font-size:14.5px;color:var(--muted);display:grid;gap:4px}
-.wa-phone{position:relative;border-radius:26px;background:#1d2528;padding:12px;max-width:300px;justify-self:center;width:100%;box-shadow:0 26px 50px -28px #1d2528b3}
-.wa-scr{position:relative;border-radius:18px;background:#fbf8f3;aspect-ratio:9/15;overflow:hidden;padding:18px 16px}
-.wa-scr .ln{height:9px;border-radius:5px;background:#e9dfd0;margin-bottom:10px}
-.wa-fab{position:absolute;right:14px;bottom:14px;width:54px;height:54px;border-radius:50%;background:#1f7a4d;color:#fff;display:grid;place-items:center;box-shadow:0 10px 22px -8px #1f7a4dcc;animation:fab 3.4s ease-in-out infinite}
-.wa-fab svg{width:26px;height:26px}
-@keyframes fab{0%,100%{transform:none}50%{transform:translateY(-5px)}}
-
-/* F proverb */
-.mt{position:relative;border-radius:18px;background:#1d2528;color:#fff;text-align:center;padding:clamp(46px,8vw,96px) 24px;overflow:hidden}
-.mt blockquote{margin:0;transition:opacity .5s}
-.mt .sw{font:600 clamp(26px,4.8vw,52px)/1.1 var(--display);letter-spacing:-.022em;color:#fff6e6}
-.mt .en{margin-top:16px;font-size:17px;color:#d5cbbb}
-.mt .mk path{stroke:#e9b65a}
-.mt-dots{display:flex;gap:8px;justify-content:center;margin-top:26px}
-.mt-dots button{width:9px;height:9px;border-radius:50%;border:0;background:#ffffff59;cursor:pointer;padding:0;transition:all .3s}
-.mt-dots button.on{width:24px;border-radius:6px;background:#fff}
-
-/* G peace */
-.pc{border-radius:18px;background:#f4ede2;padding:clamp(34px,6vw,70px) 22px;text-align:center}
-.pc-big{font:700 clamp(54px,12vw,132px)/1 var(--display);letter-spacing:-.035em;color:var(--sun);min-height:1.05em;transition:opacity .45s,transform .45s}
-.pc-big.out{opacity:0;transform:translateY(12px)}
-.pc-of{margin-top:10px;font:600 13px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
-.pc-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:28px}
-.pc-row button{font:600 13.5px var(--body);border:1px solid #e4d9c8;background:#fff;border-radius:50px;padding:8px 14px;cursor:pointer;color:var(--ink);display:inline-flex;gap:8px;align-items:center}
-.pc-row button.on{border-color:var(--sun);background:var(--sun-soft)}
-.pc-row i{font-style:normal;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#7a5510}
-.pc-row i.y{color:#2f5230}
-
-/* H school year */
-.yr{padding:clamp(20px,3.6vw,34px)}
-.yr-grid{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;margin-top:22px}
-.yr-m{font:600 11px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:8px}
-.yr-bar{height:38px;border-radius:9px;display:grid;place-items:center;font:600 12.5px var(--body);color:#fff;transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.yr.go .yr-bar{transform:none}
-.yr-bar.t{background:var(--sun)}.yr-bar.r{background:#4f8fb8;height:26px;font-size:11.5px}.yr-bar.h{background:#efe6d8;color:var(--muted)}
-.yr-row{display:contents}
-.yr-lab{grid-column:1/-1;font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:14px 0 4px}
-.yr-now{position:absolute;top:22px;bottom:-6px;width:2px;background:var(--ink);border-radius:2px}
-.yr-now::before{content:attr(data-l);position:absolute;top:-24px;left:50%;transform:translateX(-50%);white-space:nowrap;font:700 10.5px var(--body);letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:50px;padding:4px 9px}
-
-/* I ladder */
-.ld{display:grid;gap:10px;padding:clamp(20px,3.6vw,34px)}
-.ld-step{display:grid;grid-template-columns:150px 1fr auto;gap:16px;align-items:center;border-radius:14px;background:#fbf8f3;border:1px solid #ece4d8;padding:14px 18px;opacity:0;transform:translateX(-18px);transition:opacity .6s,transform .6s}
-.ld.go .ld-step{opacity:1;transform:none}
-.ld-step:nth-child(2){margin-left:4%}.ld-step:nth-child(3){margin-left:8%}.ld-step:nth-child(4){margin-left:12%}
-.ld-step:nth-child(2){transition-delay:.12s}.ld-step:nth-child(3){transition-delay:.24s}.ld-step:nth-child(4){transition-delay:.36s}
-.ld-step b{font:600 18px var(--display)}.ld-step span{color:var(--muted);font-size:14.5px}
-.ld-step em{font:600 11px var(--body);font-style:normal;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-
-/* J accountability */
-.ac{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.ac div{padding:20px;display:grid;gap:8px;align-content:start}
-.ac i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--acacia-soft)}
-.ac i svg{width:22px;height:22px}
-.ac b{font:600 17px var(--display)}.ac span{font-size:14px;color:var(--muted)}
-.ac code{font:600 12.5px var(--body);color:#7a5510;background:var(--gold-soft);border-radius:6px;padding:3px 7px;justify-self:start}
-
-/* K data saver */
-.ds{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center;padding:clamp(20px,3.6vw,34px)}
-.ds-sw{display:inline-flex;align-items:center;gap:12px;cursor:pointer;font:600 16px var(--body);background:none;border:0;color:var(--ink);padding:0}
-.ds-sw i{position:relative;width:52px;height:30px;border-radius:30px;background:#d9cfc0;transition:background .25s}
-.ds-sw i::after{content:"";position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 5px #0003;transition:transform .25s}
-.ds-sw[aria-pressed=true] i{background:var(--acacia)}.ds-sw[aria-pressed=true] i::after{transform:translateX(22px)}
-.ds-meter{margin-top:22px}
-.ds-meter small{font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.ds-track{height:14px;border-radius:8px;background:#efe6d8;overflow:hidden;margin-top:8px}
-.ds-fill{height:100%;width:100%;border-radius:8px;background:linear-gradient(90deg,var(--sun),var(--gold));transition:width .9s cubic-bezier(.2,.8,.2,1)}
-.ds-n{font:700 clamp(30px,5vw,46px) var(--display);font-variant-numeric:tabular-nums;margin-top:10px}
-.ds-pic{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#2a2f2b}
-.ds-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
-.ds-pic img.on{opacity:1}
-.ds-pic span{position:absolute;left:10px;bottom:10px;font:600 10.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#1d2528b8;padding:5px 9px;border-radius:50px}
-
-/* L place strip */
-.pl{display:grid;grid-auto-flow:column;grid-auto-columns:min(78%,420px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px}
-.pl figure{margin:0;scroll-snap-align:start;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#1d2528}
-.pl img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
-.pl figure:hover img{transform:scale(1.05)}
-.pl figcaption{position:absolute;inset:auto 0 0 0;padding:44px 18px 18px;color:#fff;background:linear-gradient(180deg,transparent,#141a1ce6)}
-.pl figcaption b{display:block;font:600 21px var(--display);letter-spacing:-.012em}
-.pl figcaption span{display:block;font-size:14.5px;color:#e9dfd0;margin-top:4px}
-
-/* M mind these */
-.md{display:grid;gap:14px}
-.md-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.md-c{padding:18px;display:grid;gap:12px;align-content:start}
-.md-c.no{border-color:#eccabf;background:#fdf6f3}.md-c.yes{border-color:#cfe0c8;background:#f6faf3}
-.md-h{display:flex;align-items:center;gap:9px;font:700 11px var(--body);letter-spacing:.1em;text-transform:uppercase}
-.md-c.no .md-h{color:var(--sun-ink)}.md-c.yes .md-h{color:#2f5230}
-.md-h svg{width:18px;height:18px}
-.md-ex{border-radius:10px;background:#fff;border:1px solid #ece4d8;padding:14px;min-height:76px;display:grid;align-content:center;gap:6px;font-size:15px}
-.md-ex b{font:600 19px var(--display)}
-.md-why{font-size:13.5px;color:var(--muted)}
-.flagbar{display:flex;height:26px;border-radius:6px;overflow:hidden}.flagbar i{flex:1}
-.ourbar{height:8px;border-radius:4px;background:var(--beads)}
-
-@media (max-width:820px){.lab-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.sc,.mp,.wa,.ds,.md-row{grid-template-columns:1fr}.sc-dial{justify-self:center}.ac{grid-template-columns:1fr 1fr}.ld-step{grid-template-columns:1fr;gap:4px;margin-left:0!important}.yr-m{font-size:9px;letter-spacing:0}.yr-bar{font-size:10.5px}.yr-bar.h{font-size:0}.seg button{padding:8px 12px;font-size:12.5px}.sc-line small{width:auto}.lg-nav{gap:12px;font-size:13px}}
-@media (prefers-reduced-motion:reduce){.wa-fab{animation:none}.yr-bar,.ld-step{transition:none}}
+.tg.ok{background:var(--acacia-soft);border-color:#cfe0c8;color:#2f5230}.tg.st{background:var(--sun-soft);border-color:#eccabf;color:var(--sun-ink)}
+.src{font-size:13px;color:var(--muted);margin-top:14px;max-width:80ch}
+.cardx{background:#fff;border:1px solid #ece4d8;border-radius:18px;box-shadow:0 20px 44px -30px #3a2a1a80}
+.seg button{white-space:nowrap}
+.board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:26px}
+.board div{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid #ece4d8}
+.board i{font-style:normal;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f4ede2;font:700 14px var(--display);color:var(--sun-ink)}
+.board b{font-weight:600;font-size:15px}.board small{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+.board em{font:600 10.5px var(--body);font-style:normal;letter-spacing:.07em;text-transform:uppercase;border-radius:50px;padding:5px 10px;white-space:nowrap}
+.board em.live{background:var(--acacia-soft);color:#2f5230}.board em.wait{background:var(--gold-soft);color:#7a5510}
+.kd{padding:clamp(18px,3.4vw,32px);display:grid;gap:0}
+.kd-row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:12px 0;border-top:1px solid #f0e8dc;align-items:baseline}
+.kd-row:first-child{border-top:0}
+.kd-row time{font:600 14px var(--body);color:var(--sun-ink);font-variant-numeric:tabular-nums}
+.kd-row b{font:600 17px var(--display)}.kd-row span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.kd-row.next{background:var(--gold-soft);margin:0 -14px;padding-inline:14px;border-radius:12px;border-top-color:transparent}
+.kd-row.next b::after{content:"Next";margin-left:10px;font:700 10px var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:50px;padding:4px 8px;vertical-align:middle}
+.kd-row.past{opacity:.5}
+.gt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gt button{all:unset;cursor:pointer;display:grid;gap:10px;padding:20px;border-radius:16px;background:#fff;border:1.5px solid #ece4d8;transition:border-color .2s,transform .2s,box-shadow .2s}
+.gt button:hover{transform:translateY(-3px);box-shadow:0 16px 30px -22px #3a2a1a99}
+.gt button:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.gt button[aria-pressed=true]{border-color:var(--sun);background:#fffaf6}
+.gt b{font:600 22px var(--display)}.gt small{color:var(--muted);font-size:14px}
+.gt-bar{height:12px;border-radius:7px;background:#efe6d8;overflow:hidden}.gt-bar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--sun),var(--gold));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.gt span{font:600 13px var(--body);color:var(--sun-ink)}
+.gt-out{margin-top:18px;padding:18px 20px;font-size:16px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;font:600 11px var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid #ece4d8}
+.tbl td{padding:13px 14px;border-bottom:1px solid #f3ecdf;vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{font-weight:600}
+.ph{font:600 12px var(--body);color:#7a5510;background:var(--gold-soft);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.lv{display:inline-flex;gap:4px}.lv i{width:22px;height:8px;border-radius:4px;background:#e9dfd0}
+.tblwrap{overflow-x:auto}
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:clamp(18px,3.4vw,32px);align-items:center}
+.gg input{width:100%;font:500 17px var(--body);padding:13px 15px;border-radius:12px;border:1.5px solid #dfd3c0;background:#fffdf9;color:var(--ink)}
+.gg label{font:600 12px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.gg-prev{border-radius:14px;background:#1d2528;color:#fff;padding:22px}
+.gg-prev small{font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:#c9d3d6}
+.gg-prev b{display:block;font:600 24px var(--display);color:var(--gold);margin:8px 0 6px;word-break:break-word}
+.gg-prev span{color:#e9dfd0;font-size:14.5px}
+.nd{display:grid;grid-template-columns:1fr auto;gap:26px;padding:clamp(18px,3.4vw,32px);align-items:center}
+.nd-sms{width:230px;border-radius:22px;background:#1d2528;padding:12px}
+.nd-sms div{border-radius:14px;background:#fbf8f3;padding:14px;display:grid;gap:10px;min-height:150px;align-content:end}
+.nd-sms p{margin:0;font-size:13.5px;line-height:1.4;padding:9px 11px;border-radius:12px;background:#e9dfd0;max-width:92%}
+.nd-sms p.me{background:var(--acacia-soft);justify-self:end}
+.ba{padding:clamp(18px,3.4vw,32px)}
+.ba-stage{margin-top:18px;border-radius:14px;border:1px solid #ece4d8;overflow:hidden;background:#fffdf9}
+.mock-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px}
+.mock-head b{font:600 17px var(--display);line-height:1.1}.mock-head small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mock-head nav{display:flex;gap:16px;font:600 13.5px var(--body)}
+.mock-line{height:5px;background:var(--beads);transition:all .5s}
+.mock-line.one{background:var(--sun);height:3px}
+.mock-hero{position:relative;color:#fff;text-align:center;padding:44px 20px;background:#1d2528 url(img/cliffe/goats-grazing-below-hills.jpg) center 40%/cover;isolation:isolate}
+.mock-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:#1d2528b3}
+.mock-hero h3{color:#fff;font-size:clamp(24px,4vw,40px);letter-spacing:-.024em}
+.mock-hero .btn{margin-top:18px}
+.mock-hero p{margin:14px auto 0;max-width:46ch;font-size:14.5px;color:#f1ece6}
+[data-sw]{transition:opacity .25s}
+.au{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.au figure{margin:0;position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;background:#f4ede2;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+.au figure:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.au img{width:100%;height:100%;object-fit:cover;display:block}
+.au figcaption{position:absolute;left:8px;top:8px;font:700 12px var(--display);background:#fff;border-radius:50%;width:26px;height:26px;display:grid;place-items:center}
+.au figure.pick{border-color:var(--sun)}.au figure.pick::after{content:"Redraw";position:absolute;right:8px;bottom:8px;font:700 10px var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--sun);color:#fff;border-radius:50px;padding:5px 9px}
+.mn{position:relative;border-radius:18px;overflow:hidden;isolation:isolate;min-height:330px;background:#0f1429 url(img/bg-day-night.jpg) center bottom/cover;display:grid;align-content:start;justify-items:center;padding:34px 20px;color:#fff6e6;text-align:center}
+.mn svg{width:92px;height:92px;filter:drop-shadow(0 0 18px #cfd8ff66)}
+.mn h3{color:#fff6e6;font-size:clamp(22px,3.4vw,32px);margin-top:16px}
+.mn p{margin:8px 0 0;color:#d5cbbb;font-size:15px}
+.mn-stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.7;animation:tw 4s ease-in-out infinite}
+@keyframes tw{50%{opacity:.2}}
+@media (max-width:820px){.lab-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.board,.gt,.gg,.nd{grid-template-columns:1fr}.au{grid-template-columns:repeat(3,minmax(0,1fr))}.kd-row{grid-template-columns:1fr;gap:2px}.mock-head nav{display:none}.nd-sms{justify-self:center}.board div{grid-template-columns:34px 1fr}.board em{grid-column:2;justify-self:start}}
+@media (prefers-reduced-motion:reduce){.mn-stars i{animation:none}}
 </style>
 </head>
 <body class="lab" data-font="fraunces" data-bg="none">
-<header><div class="wrap lab-bar"><a class="logo" href="index.html"><span><b>QOP Hope Foundation</b><small>Kenyan roots: ideas to try</small></span></a><a class="btn btn-line" href="index.html">Back to the site</a></div></header>
+<header><div class="wrap lab-bar"><a class="logo" href="index.html"><span><b>QOP Hope Foundation</b><small>Kenyan roots: second set of ideas</small></span></a><a class="btn btn-line" href="index.html">Back to the site</a></div></header>
 <main>
-<div class="wrap lab-intro"><p class="eyebrow">Demo page</p><h1>Made to feel Kenyan.</h1><p class="lead">Thirteen ideas, each one working, so you can try it before deciding. None is on the real site. To add one, tell me its letter. Every idea says who has to check it first.</p><nav class="lab-nav" aria-label="Ideas"><a href="#dA"><i>A</i><span>Kiswahili switch<em class="c">English or Kiswahili</em></span></a><a href="#dB"><i>B</i><span>Saa ya Isiolo<em class="c">The Swahili clock</em></span></a><a href="#dC"><i>C</i><span>Habari<em class="c">A greeting that fits the hour</em></span></a><a href="#dD"><i>D</i><span>Lipa na M-Pesa<em class="c">Giving the way Kenyans pay</em></span></a><a href="#dE"><i>E</i><span>WhatsApp<em class="c">Talk to us on WhatsApp</em></span></a><a href="#dF"><i>F</i><span>Methali<em class="c">A proverb, where it fits</em></span></a><a href="#dG"><i>G</i><span>Amani<em class="c">Peace, in the languages of Isiolo</em></span></a><a href="#dH"><i>H</i><span>Mwaka wa shule<em class="c">The school year and the rains</em></span></a><a href="#dI"><i>I</i><span>Ngazi ya elimu<em class="c">The school ladder, in Kenya&#39;s own terms</em></span></a><a href="#dJ"><i>J</i><span>Uwazi<em class="c">Proof you are real</em></span></a><a href="#dK"><i>K</i><span>Data saver<em class="c">Kind to a small data bundle</em></span></a><a href="#dL"><i>L</i><span>Karibu Isiolo<em class="c">Meet the place first</em></span></a><a href="#dM"><i>M</i><span>Heshima<em class="c">Things to leave out</em></span></a></nav></div>
-<section class="lab-panel" id="dA"><div class="wrap"><div class="lab-head"><span class="lab-num">A</span><div><h2>Kiswahili switch</h2><p>A small EN / SW switch in the header. Every page changes language in place, and the choice is remembered. English and Kiswahili are Kenya&#39;s two official languages.</p></div></div><div class="tagrow"><span class="tg rv">Needs a fluent Kiswahili reviewer</span><span class="tg st">Start with Home, Sponsor and Get involved</span></div><div class="lab-stage"><div class="card lg" id="lg"><div class="lg-bar"><div class="lg-nav"><span data-t="Home|Nyumbani">Home</span><span data-t="About|Kuhusu sisi">About</span><span data-t="Our work|Kazi yetu">Our work</span><span data-t="Impact|Matokeo">Impact</span><span data-t="Partners|Washirika">Partners</span><span data-t="Get involved|Jiunge nasi">Get involved</span></div><div class="seg" role="group" aria-label="Language"><button type="button" aria-pressed="true" data-l="0">English</button><button type="button" aria-pressed="false" data-l="1">Kiswahili</button></div></div><div class="lg-hero"><p class="eyebrow" data-t="Educate · Protect · Empower|Elimisha · Linda · Wezesha">Educate · Protect · Empower</p><h3 data-t="Every child deserves a future.|Kila mtoto anastahili maisha bora ya baadaye.">Every child deserves a future.</h3><p class="l" data-t="We help vulnerable children across Isiolo County get to school, stay safe and grow into confident, independent young people.|Tunawasaidia watoto walio katika mazingira magumu kote katika Kaunti ya Isiolo kwenda shule, kuwa salama, na kukua wakiwa vijana wenye kujiamini na kujitegemea.">We help vulnerable children across Isiolo County get to school, stay safe and grow into confident, independent young people.</p><div class="lg-cta"><span class="btn btn-sun" data-t="Sponsor a child|Fadhili mtoto">Sponsor a child</span><span class="btn btn-glass" data-t="See our work|Tazama kazi yetu">See our work</span></div></div></div></div><p class="src">The Kiswahili here is a first draft to show the idea. It must be read and corrected by a fluent speaker (Cliffe or Josephine) before any of it goes on the real site, above all the safeguarding wording.</p></div></section><section class="lab-panel" id="dB"><div class="wrap"><div class="lab-head"><span class="lab-num">B</span><div><h2>Saa ya Isiolo: the Swahili clock</h2><p>In Kiswahili the day is counted from sunrise, so 7 in the morning is &ldquo;saa moja&rdquo;, the first hour. The time label can show both, live from the real clock in Isiolo.</p></div></div><div class="tagrow"><span class="tg rv">Needs a fluent Kiswahili reviewer</span><span class="tg ok">Uses the clock already on the site</span></div><div class="lab-stage"><div class="card sc"><div class="sc-dial" id="scd"><span class="sc-hand h"></span><span class="sc-hand m"></span></div><div class="sc-read"><div class="sc-line"><small>English</small><span id="sc-en">7:06 am</span></div><div class="sc-line sw"><small>Kiswahili</small><span id="sc-sw">Saa moja asubuhi</span></div><p class="sc-key">On the dial, the <b>dark numbers</b> are the clock you know. The <i>red numbers</i> are the Swahili hours: six hours apart, because the count starts at sunrise.</p><div class="lab-row" role="group" aria-label="Preview a time"><button class="lab-btn sc-b" type="button" data-m="-1" aria-pressed="true">Right now</button><button class="lab-btn sc-b" type="button" data-m="420" aria-pressed="false">7:00 am</button><button class="lab-btn sc-b" type="button" data-m="735" aria-pressed="false">12:15 pm</button><button class="lab-btn sc-b" type="button" data-m="1110" aria-pressed="false">6:30 pm</button><button class="lab-btn sc-b" type="button" data-m="1320" aria-pressed="false">10:00 pm</button></div></div></div></div></div></section><section class="lab-panel" id="dC"><div class="wrap"><div class="lab-head"><span class="lab-num">C</span><div><h2>A greeting that fits the hour</h2><p>The first line a visitor sees greets them the way people do in Kenya, by the time of day in Isiolo, with the English under it.</p></div></div><div class="tagrow"><span class="tg rv">Needs a fluent Kiswahili reviewer</span><span class="tg ok">Uses the clock and header already on the site</span></div><div class="lab-stage"><div class="gr" id="gr" data-p="asubuhi"><div class="gr-d"></div><div class="gr-n"></div><span class="it-chip" style="background:#ffffffd9;border-color:#e4d9c8;margin-bottom:18px"><i aria-hidden="true"></i><span>Isiolo time <span id="gr-t"></span></span></span><h3 id="gr-sw">Habari ya asubuhi. Karibuni.</h3><p id="gr-en">Good morning from Isiolo. You are welcome here.</p></div><div class="lab-row" role="group" aria-label="Preview"><button class="lab-btn gr-b" type="button" data-p="" aria-pressed="true">Right now</button><button class="lab-btn gr-b" type="button" data-p="asubuhi" aria-pressed="false">Morning</button><button class="lab-btn gr-b" type="button" data-p="mchana" aria-pressed="false">Afternoon</button><button class="lab-btn gr-b" type="button" data-p="jioni" aria-pressed="false">Evening</button><button class="lab-btn gr-b" type="button" data-p="usiku" aria-pressed="false">Night</button></div></div></div></section><section class="lab-panel" id="dD"><div class="wrap"><div class="lab-head"><span class="lab-num">D</span><div><h2>Giving the way Kenyans pay</h2><p>Most giving inside Kenya happens on a phone with M-Pesa. Kenyan sites show the number large, with the same short steps people already know from their phone menu.</p></div></div><div class="tagrow"><span class="tg st">Needs the Foundation&#39;s real details</span><span class="tg st">Money goes to the Foundation&#39;s own account, never through a person</span></div><div class="lab-stage"><div class="card mp"><div class="mp-l"><div class="seg" role="group" aria-label="How to give"><button type="button" class="mp-t" aria-pressed="true" data-k="0">M-Pesa</button><button type="button" class="mp-t" aria-pressed="false" data-k="1">Bank</button><button type="button" class="mp-t" aria-pressed="false" data-k="2">From abroad</button></div><div class="mp-pane on"><ol class="mp-steps"><li><span>Open <b>M-Pesa</b> on your phone</span></li><li><span>Choose <b>Lipa na M-Pesa</b></span></li><li><span>Choose <b>Pay Bill</b></span></li><li><span>Enter the <b>business number</b></span></li><li><span>Account: <b>your name</b></span></li><li><span>Enter the <b>amount</b> and your <b>PIN</b></span></li></ol></div><div class="mp-pane"><ol class="mp-steps"><li><span>Bank: <b>the Foundation&#39;s bank</b></span></li><li><span>Account name: <b>QOP Hope Foundation</b></span></li><li><span>Account number and branch <b>as on the right</b></span></li><li><span>Send us the slip so we can <b>receipt you</b></span></li></ol></div><div class="mp-pane"><ol class="mp-steps"><li><span>Give by <b>card or PayPal</b> from any country</span></li><li><span>We convert to <b>Kenya shillings</b></span></li><li><span>You get a <b>receipt by email</b></span></li><li><span>Fees go <b>straight to the school</b></span></li></ol></div></div><div class="mp-r"><div class="mp-num"><small id="mp-lab">Pay Bill business number</small><b id="mp-n">000 000</b></div><p class="mp-ph">Placeholder. The Foundation&#39;s real number goes here.</p><button class="mp-copy" type="button">Copy the number</button></div></div></div><p class="src">No logo of any phone company or bank is used: the name of the service in plain words is enough, and it avoids passing off as them.</p></div></section><section class="lab-panel" id="dE"><div class="wrap"><div class="lab-head"><span class="lab-num">E</span><div><h2>Talk to us on WhatsApp</h2><p>In Kenya people expect to message an organisation on WhatsApp or call it, not fill in a form. A button that follows you down the page, a number in +254 form, and office hours in East Africa Time.</p></div></div><div class="tagrow"><span class="tg st">Needs the Foundation&#39;s real details</span><span class="tg st">A Foundation phone, not a personal one</span></div><div class="lab-stage"><div class="wa"><div class="card wa-card"><p class="eyebrow">Wasiliana nasi<span class="draft">draft</span></p><h3 style="margin-top:10px;font-size:26px">Message or call the Foundation</h3><div class="wa-btns"><span class="wa-b g"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.6 8.3c.3-.6.6-.6.9-.6h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.2-.2.3 0 .6.5.8 1.400 1.700 2.500 2.200.3.1.5.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.500.7c.3.1.4.3.4.5 0 .9-.7 1.700-1.700 1.800-2.800.2-6.600-3-7.200-5.900-.1-.6 0-1.100.2-1.600z" fill="currentColor"/></svg>WhatsApp us</span><span class="wa-b l"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.500 3.500h3l1.500 4-2 1.500c1 2.200 2.800 4 5 5l1.500-2 4 1.500v3c0 1.100-.9 2-2 2C10.500 18.500 5.500 13.500 4.500 5.500c0-1.100.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>Call</span></div><div class="wa-meta"><span><b>+254 7XX XXX XXX</b> (placeholder)</span><span>Monday to Friday, 8:00 am to 5:00 pm, East Africa Time</span><span id="wa-open"></span></div></div><div class="wa-phone"><div class="wa-scr"><div class="ln" style="width:60%"></div><div class="ln" style="width:92%"></div><div class="ln" style="width:84%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:88%;margin-top:22px"></div><div class="ln" style="width:76%"></div><div class="ln" style="width:52%"></div><span class="wa-fab" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.6 8.3c.3-.6.6-.6.9-.6h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.2-.2.3 0 .6.5.8 1.400 1.700 2.500 2.200.3.1.5.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.500.7c.3.1.4.3.4.5 0 .9-.7 1.700-1.700 1.800-2.800.2-6.600-3-7.200-5.900-.1-.6 0-1.100.2-1.600z" fill="currentColor"/></svg></span></div></div></div></div></div></section><section class="lab-panel" id="dF"><div class="wrap"><div class="lab-head"><span class="lab-num">F</span><div><h2>A proverb, where it fits</h2><p>Kiswahili proverbs (methali) are part of everyday speech in Kenya. One line, with its meaning, above the giving section or at the foot of a page.</p></div></div><div class="tagrow"><span class="tg rv">Needs a fluent Kiswahili reviewer</span><span class="tg st">Josephine chooses which ones are hers to use</span></div><div class="lab-stage"><div class="mt" id="mt"><blockquote><p class="sw"></p><p class="en"></p></blockquote><div class="mt-dots" role="group" aria-label="Proverbs"></div></div></div></div></section><section class="lab-panel" id="dG"><div class="wrap"><div class="lab-head"><span class="lab-num">G</span><div><h2>Peace, in the languages of Isiolo</h2><p>The Foundation grew from peace work. One word, in each language spoken in Isiolo, shown with the name of the language. It tells every family: this place is yours too.</p></div></div><div class="tagrow"><span class="tg st">Needs Josephine and Cliffe</span><span class="tg st">Every word confirmed by a speaker of that language before it is shown</span></div><div class="lab-stage"><div class="pc"><div class="pc-big" id="pc-w">Amani</div><div class="pc-of" id="pc-l">Kiswahili</div><div class="pc-row" id="pc-r"></div></div></div><p class="src">Only the Kiswahili word is certain. The others are the words most often given for &ldquo;peace&rdquo; in each language and are marked &ldquo;to confirm&rdquo;. A wrong word here would do more harm than no word.</p></div></section><section class="lab-panel" id="dH"><div class="wrap"><div class="lab-head"><span class="lab-num">H</span><div><h2>The school year and the rains</h2><p>A year in Isiolo at a glance: the three school terms, and the two rainy seasons that decide whether a family&#39;s animals, and its school fees, are safe.</p></div></div><div class="tagrow"><span class="tg st">Term dates set each year by the Ministry of Education: check before publishing</span><span class="tg ok">Could go on now</span></div><div class="lab-stage"><div class="card yr" id="yr"><div class="yr-grid"><span class="yr-m">Jan</span><span class="yr-m">Feb</span><span class="yr-m">Mar</span><span class="yr-m">Apr</span><span class="yr-m">May</span><span class="yr-m">Jun</span><span class="yr-m">Jul</span><span class="yr-m">Aug</span><span class="yr-m">Sep</span><span class="yr-m">Oct</span><span class="yr-m">Nov</span><span class="yr-m">Dec</span><span class="yr-lab">School terms</span><span class="yr-bar t" style="grid-column:1/span 3">Term 1</span><span class="yr-bar h" style="grid-column:4/span 1">Break</span><span class="yr-bar t" style="grid-column:5/span 3">Term 2</span><span class="yr-bar h" style="grid-column:8/span 1">Break</span><span class="yr-bar t" style="grid-column:9/span 2">Term 3</span><span class="yr-bar h" style="grid-column:11/span 2">Long break</span><span class="yr-lab">Rains</span><span class="yr-bar r" style="grid-column:3/span 3">Long rains</span><span class="yr-bar r" style="grid-column:10/span 3">Short rains</span><span class="yr-now" id="yr-now" data-l="Today"></span></div></div></div></div></section><section class="lab-panel" id="dI"><div class="wrap"><div class="lab-head"><span class="lab-num">I</span><div><h2>The school ladder, in Kenya&#39;s own terms</h2><p>Kenyan schools now follow the competency-based system: pre-primary, primary, junior school, senior school. Using these names, and not &ldquo;elementary&rdquo; or &ldquo;high school&rdquo;, is what makes a Kenyan parent feel the site was written for them.</p></div></div><div class="tagrow"><span class="tg st">The Foundation says which levels it supports</span><span class="tg ok">Wording only</span></div><div class="lab-stage"><div class="card ld" id="ld"><div class="ld-step"><b>Pre-primary</b><span>PP1 and PP2</span><em>ages 4 to 5</em></div><div class="ld-step"><b>Primary</b><span>Grade 1 to Grade 6</span><em>ages 6 to 11</em></div><div class="ld-step"><b>Junior school</b><span>Grade 7 to Grade 9</span><em>ages 12 to 14</em></div><div class="ld-step"><b>Senior school</b><span>Grade 10 to Grade 12. Some older students are still finishing Form 3 and Form 4.</span><em>ages 15 to 17</em></div></div></div></div></section><section class="lab-panel" id="dJ"><div class="wrap"><div class="lab-head"><span class="lab-num">J</span><div><h2>Proof you are real</h2><p>Kenyan donors and schools look for the registration number first. A plain strip near the foot of every page: how the Foundation is registered, its number, and where the yearly report and accounts can be read.</p></div></div><div class="tagrow"><span class="tg st">Needs the Foundation&#39;s real details</span><span class="tg st">Legal form and number still to come</span></div><div class="lab-stage"><div class="ac"><div class="card"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="6.5" fill="#3f6b3a"/><path d="M8.500 15l-1.500 6 5-2.500 5 2.500-1.500-6" fill="#d9a441"/><path d="M9 10l2.200 2.200L15.200 8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Registered in Kenya</b><span>Legal form as on the certificate</span><code>placeholder</code></div><div class="card"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" fill="#fffaf2" stroke="#1d2528" stroke-width="1.500"/><path d="M9 11h7M9 14.500h7M9 18h4" stroke="#b5452b" stroke-width="1.600" stroke-linecap="round"/></svg></i><b>Registration number</b><span>Shown in full, as issued</span><code>placeholder</code></div><div class="card"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" fill="#fffaf2" stroke="#1d2528" stroke-width="1.500"/><path d="M9 11h7M9 14.500h7M9 18h4" stroke="#b5452b" stroke-width="1.600" stroke-linecap="round"/></svg></i><b>Annual report</b><span>One each year, free to download</span><code>from 2027</code></div><div class="card"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="6.5" fill="#3f6b3a"/><path d="M8.500 15l-1.500 6 5-2.500 5 2.500-1.500-6" fill="#d9a441"/><path d="M9 10l2.200 2.200L15.200 8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Accounts</b><span>Checked by an outside accountant</span><code>from 2027</code></div></div></div></div></section><section class="lab-panel" id="dK"><div class="wrap"><div class="lab-head"><span class="lab-num">K</span><div><h2>Kind to a small data bundle</h2><p>Many people in Kenya pay for data by the megabyte and read on a phone. A switch (on by itself when the phone asks to save data) that keeps the words and one photo, and holds back the moving pictures and the map until asked.</p></div></div><div class="tagrow"><span class="tg ok">Could go on now</span><span class="tg ok">Figures below are this site&#39;s real picture sizes</span></div><div class="lab-stage"><div class="card ds"><div><button class="ds-sw" type="button" aria-pressed="false" id="ds-b"><i></i><span>Data saver</span></button><div class="ds-meter"><small>Photos loaded on the home page</small><div class="ds-track"><div class="ds-fill" id="ds-f"></div></div><div class="ds-n" id="ds-n">2.3 MB</div><p style="color:var(--muted);font-size:14.5px;margin-top:4px" id="ds-t">Five moving photos at the top and two photo bands.</p></div></div><div class="ds-pic" id="ds-p"><img class="on" src="img/cliffe/two-women-overlook.jpg" alt="Two women look out over the hills"><img src="img/cliffe/green-ridge.jpg" alt="" loading="lazy"><img src="img/cliffe/goats-grazing-below-hills.jpg" alt="" loading="lazy"><span id="ds-c">5 photos, changing</span></div></div></div></div></section><section class="lab-panel" id="dL"><div class="wrap"><div class="lab-head"><span class="lab-num">L</span><div><h2>Meet the place first</h2><p>Before any appeal: five of Cliffe&#39;s photographs to swipe through, each with one plain line about life in Isiolo. People, land and animals shown with dignity, no faces of children, no village named.</p></div></div><div class="tagrow"><span class="tg st">Cliffe writes or approves each line</span><span class="tg ok">Uses photos already on the site</span></div><div class="lab-stage"><div class="pl"><figure><img src="img/cliffe/two-women-overlook.jpg" alt="The land" loading="lazy"><figcaption><b>The land</b><span>Dry hills and wide plains. Families here live by their animals.</span></figcaption></figure><figure><img src="img/cliffe/goats-grazing-below-hills.jpg" alt="The herds" loading="lazy"><figcaption><b>The herds</b><span>Goats, sheep, cattle and camels are a family&#39;s savings and its school fees.</span></figcaption></figure><figure><img src="img/cliffe/woven-hut.jpg" alt="Home" loading="lazy"><figcaption><b>Home</b><span>A woven house under the acacias, built by the women of the family.</span></figcaption></figure><figure><img src="img/cliffe/women-building-enclosure.jpg" alt="Many hands" loading="lazy"><figcaption><b>Many hands</b><span>Neighbours build together. That habit of pulling together is what the Foundation runs on.</span></figcaption></figure><figure><img src="img/cliffe/boma-from-above.jpg" alt="The homestead" loading="lazy"><figcaption><b>The homestead</b><span>Houses and animal pens inside one thorn fence, seen from above.</span></figcaption></figure></div><p class="src">Photos: Cliffe Wasike. The lines are placeholders written from what the photos show.</p></div></div></section><section class="lab-panel" id="dM"><div class="wrap"><div class="lab-head"><span class="lab-num">M</span><div><h2>Respect: things to leave out</h2><p>What would make a Kenyan reader wince, shown side by side with what to do. None of the left-hand column is on the site today.</p></div></div><div class="tagrow"><span class="tg ok">A checklist for every future change</span></div><div class="lab-stage"><div class="md"><div class="md-row"><div class="card md-c no"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#b5452b"/><path d="M6.6 6.6l6.8 6.8M13.4 6.6l-6.8 6.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>Leave out</div><div class="md-ex"><div class="flagbar"><i style="background:#000"></i><i style="background:#fff;flex:.18"></i><i style="background:#b5121b"></i><i style="background:#fff;flex:.18"></i><i style="background:#0b6b2e"></i></div><span>The national flag, its shield or the coat of arms as decoration</span></div><p class="md-why">National symbols are protected by law and are not ours to decorate with.</p></div><div class="card md-c yes"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#3f6b3a"/><path d="M5.6 10.4l2.9 2.9 5.9-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Do this</div><div class="md-ex"><div class="ourbar"></div><span>Our own colours, taken from Cliffe&#39;s photographs of the land and the beadwork</span></div><p class="md-why">The site looks Kenyan because of what it shows, not because it borrows the flag.</p></div></div><div class="md-row"><div class="card md-c no"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#b5452b"/><path d="M6.6 6.6l6.8 6.8M13.4 6.6l-6.8 6.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>Leave out</div><div class="md-ex"><b>Jambo! Hakuna matata!</b><span>Tourist Swahili</span></div><p class="md-why">This is how postcards talk, not how Kenyans greet one another.</p></div><div class="card md-c yes"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#3f6b3a"/><path d="M5.6 10.4l2.9 2.9 5.9-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Do this</div><div class="md-ex"><b>Habari. Karibuni.</b><span>An everyday greeting and a welcome</span></div><p class="md-why">Plain, warm and correct. Checked by a speaker.</p></div></div><div class="md-row"><div class="card md-c no"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#b5452b"/><path d="M6.6 6.6l6.8 6.8M13.4 6.6l-6.8 6.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>Leave out</div><div class="md-ex"><b>&ldquo;Tribes&rdquo; &middot; &ldquo;tribal clashes&rdquo;</b><span>And one community&#39;s dress used to stand for all</span></div><p class="md-why">Isiolo is home to Borana, Somali, Turkana, Samburu and Meru families. No one community is the picture of the county, and none is cast as the cause of trouble.</p></div><div class="card md-c yes"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#3f6b3a"/><path d="M5.6 10.4l2.9 2.9 5.9-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Do this</div><div class="md-ex"><b>Communities, named with care</b><span>Each named as it names itself, or none singled out</span></div><p class="md-why">The Foundation serves every child. The wording should let every family see itself.</p></div></div><div class="md-row"><div class="card md-c no"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#b5452b"/><path d="M6.6 6.6l6.8 6.8M13.4 6.6l-6.8 6.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>Leave out</div><div class="md-ex"><b>Pity</b><span>Close-ups of children in distress, &ldquo;save them&rdquo; wording</span></div><p class="md-why">It takes dignity from the children and breaks the safeguarding promise on the About page.</p></div><div class="card md-c yes"><div class="md-h"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#3f6b3a"/><path d="M5.6 10.4l2.9 2.9 5.9-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Do this</div><div class="md-ex"><b>Dignity</b><span>Children drawn or seen from behind, families as the ones doing the work</span></div><p class="md-why">Kenyan-led change, with supporters standing beside it.</p></div></div></div></div><p class="src">These four are the cautions I am sure of. The research note lists more, each with its source.</p></div></section>
+<div class="wrap lab-intro"><p class="eyebrow">Demo page</p><h1>Your picks, and what comes next.</h1><p class="lead">First, where each of your thirteen picks now stands. Then eleven new ideas from a second, harder look at the site: some add, some refine, some replace. None of the new ones is on the real site. Say a letter to add it.</p><div class="board"><div><i>A</i><span><b>Kiswahili switch</b><small>Built. Draft Kiswahili being prepared for review</small></span><em class="wait">Waiting</em></div><div><i>B</i><span><b>Swahili clock</b><small>In the time panel, every page header</small></span><em class="live">On the site</em></div><div><i>C</i><span><b>Greeting by the hour</b><small>Home, above the hero label</small></span><em class="live">On the site</em></div><div><i>D</i><span><b>Giving the way Kenyans pay</b><small>Sponsor. Says &ldquo;Coming soon&rdquo; where the number will go</small></span><em class="live">On the site</em></div><div><i>E</i><span><b>WhatsApp and call</b><small>Built. Appears when the Foundation has a number</small></span><em class="wait">Waiting</em></div><div><i>F</i><span><b>A proverb</b><small>Sponsor, above &ldquo;Follow a shilling&rdquo;</small></span><em class="live">On the site</em></div><div><i>G</i><span><b>Peace in Isiolo&#39;s languages</b><small>Built. Appears once speakers confirm the words</small></span><em class="wait">Waiting</em></div><div><i>H</i><span><b>School year and the rains</b><small>Our work, with 2027 dates</small></span><em class="live">On the site</em></div><div><i>I</i><span><b>School ladder</b><small>Our work</small></span><em class="live">On the site</em></div><div><i>J</i><span><b>Uwazi: how we are registered</b><small>Built. Appears when the certificate details are in</small></span><em class="wait">Waiting</em></div><div><i>K</i><span><b>Data saver</b><small>Footer switch; on by itself when a phone asks</small></span><em class="live">On the site</em></div><div><i>L</i><span><b>Meet the place first</b><small>Home, before &ldquo;Where we work&rdquo;</small></span><em class="live">On the site</em></div><div><i>M</i><span><b>Heshima</b><small>Wording fixed; a standing checklist kept with the site</small></span><em class="live">On the site</em></div></div>
+<h2 style="margin-top:56px;font-size:clamp(26px,3.4vw,36px)">Eleven new ideas</h2><nav class="lab-nav" aria-label="New ideas"><a href="#dN"><i>N</i><span>Key dates for 2027<em class="add">Adds</em></span></a><a href="#dO"><i>O</i><span>Give by the term<em class="ref">Refines</em></span></a><a href="#dP"><i>P</i><span>Our service charter<em class="add">Adds</em></span></a><a href="#dQ"><i>Q</i><span>Give as a group<em class="add">Adds</em></span></a><a href="#dR"><i>R</i><span>Reach us without data<em class="add">Adds</em></span></a><a href="#dS"><i>S</i><span>&ldquo;Sponsor a term&rdquo;<em class="rep">Replaces</em></span></a><a href="#dT"><i>T</i><span>One line for the stripe<em class="rep">Replaces</em></span></a><a href="#dU"><i>U</i><span>A wider mix in the drawings<em class="ref">Refines</em></span></a><a href="#dV"><i>V</i><span>The line under the logo<em class="rep">Replaces</em></span></a><a href="#dW"><i>W</i><span>The moon at night<em class="add">Adds</em></span></a><a href="#dX"><i>X</i><span>Our own report form<em class="rep">Replaces</em></span></a></nav></div>
+<section class="lab-panel" id="dN"><div class="wrap"><span class="kind add">Adds something new</span><div class="lab-head"><span class="lab-num">N</span><div><h2>Key dates for 2027</h2><p>Every Kenyan parent and head teacher plans by opening day, half-term and closing day. A short list on the Our work page, with the next date picked out by itself.</p></div></div><div class="tagrow"><span class="tg st">Cliffe confirms</span><span class="tg ok">Dates as reported in two Kenyan papers</span></div><div class="lab-stage"><div class="cardx kd" id="kd"><div class="kd-row" data-d="2027-01-04"><time>Mon 4 January</time><div><b>Term 1 opens</b><span>Half of the year&#39;s fees fall due</span></div></div><div class="kd-row" data-d="2027-02-19"><time>19 to 28 February</time><div><b>Half-term</b></div></div><div class="kd-row" data-d="2027-04-09"><time>Fri 9 April</time><div><b>Term 1 closes</b><span>Senior schools close on 2 April. April holiday</span></div></div><div class="kd-row" data-d="2027-05-03"><time>Mon 3 May</time><div><b>Term 2 opens</b></div></div><div class="kd-row" data-d="2027-06-09"><time>9 to 20 June</time><div><b>Half-term</b></div></div><div class="kd-row" data-d="2027-07-30"><time>Fri 30 July</time><div><b>Term 2 closes</b><span>August holiday</span></div></div><div class="kd-row" data-d="2027-08-30"><time>Mon 30 August</time><div><b>Term 3 opens</b><span>No half-term</span></div></div><div class="kd-row" data-d="2027-11-05"><time>Fri 5 November</time><div><b>Term 3 closes</b><span>National assessments in the first week of November. December holiday</span></div></div></div></div><p class="src">From press reports of the Ministry of Education&#39;s 2027 calendar. The Ministry&#39;s own circular was not opened, so Cliffe should check these against a school&#39;s calendar.</p></div></section><section class="lab-panel" id="dO"><div class="wrap"><span class="kind ref">Refines what is there</span><div class="lab-head"><span class="lab-num">O</span><div><h2>Give by the term</h2><p>In Kenya school costs come by the term, and schools are told to spread a year&#39;s fees 50, 30, 20. So the gift picker could lead with terms, in place of &ldquo;Give monthly&rdquo;.</p></div></div><div class="tagrow"><span class="tg st">Your call</span><span class="tg st">No amounts until the Foundation sets them</span></div><div class="lab-stage"><div class="gt" role="group" aria-label="Pick a term"><button type="button" aria-pressed="true"><b>Term 1</b><small>Opens 4 January</small><div class="gt-bar"><i data-w="50"></i></div><span>Half of the year&#39;s fees</span></button><button type="button" aria-pressed="false"><b>Term 2</b><small>Opens 3 May</small><div class="gt-bar"><i data-w="30"></i></div><span>Three tenths</span></button><button type="button" aria-pressed="false"><b>Term 3</b><small>Opens 30 August</small><div class="gt-bar"><i data-w="20"></i></div><span>Two tenths</span></button></div><div class="cardx gt-out" id="gt-out"></div></div><p class="src">The 50:30:20 split is from a press report of the 2026 fees notice for senior schools; the notice itself was not read.</p></div></section><section class="lab-panel" id="dP"><div class="wrap"><span class="kind add">Adds something new</span><div class="lab-head"><span class="lab-num">P</span><div><h2>Our service charter</h2><p>Kenyan public bodies publish a service charter: what you can ask for, what you need, what it costs and how long it takes. A small one on the Impact page says &ldquo;hold us to this&rdquo; in a form every Kenyan knows.</p></div></div><div class="tagrow"><span class="tg st">Needs the Foundation&#39;s real details</span><span class="tg st">A promise: only times the Foundation can keep</span></div><div class="lab-stage"><div class="cardx tblwrap"><table class="tbl"><thead><tr><th>Service</th><th>What you need</th><th>Cost</th><th>How long</th></tr></thead><tbody><tr><td>A receipt for your gift</td><td>Your M-Pesa message or bank slip</td><td>Free</td><td><span class="ph">placeholder</span> working days</td></tr><tr><td>Term report</td><td>Nothing</td><td>Free</td><td>Within <span class="ph">placeholder</span> days of closing day</td></tr><tr><td>Answer to a question</td><td>An email or a call</td><td>Free</td><td><span class="ph">placeholder</span> working days</td></tr><tr><td>Partner school enquiry</td><td>A letter from the head teacher or principal</td><td>Free</td><td><span class="ph">placeholder</span> working days</td></tr></tbody></table></div></div></div></section><section class="lab-panel" id="dQ"><div class="wrap"><span class="kind add">Adds something new</span><div class="lab-head"><span class="lab-num">Q</span><div><h2>Give as a group</h2><p>Kenyans often give together: a chama, a class, a congregation, a workplace. One line under &ldquo;Ways to give&rdquo; invites a group to use its own name, and the group sees itself thanked as one.</p></div></div><div class="tagrow"><span class="tg st">Needs the Foundation&#39;s real details</span><span class="tg st">Group names shown only with their say</span></div><div class="lab-stage"><div class="cardx gg"><div><label for="gg-in">Your group&#39;s name</label><input id="gg-in" value="Class of 2010" maxlength="40" autocomplete="off"><p class="src" style="margin-top:12px">Type a name to see how the thank-you would read.</p></div><div class="gg-prev"><small>Thank you</small><b id="gg-out">Class of 2010</b><span>gave together this term. Amount shown only if the group wishes.</span></div></div></div></div></section><section class="lab-panel" id="dR"><div class="wrap"><span class="kind add">Adds something new</span><div class="lab-head"><span class="lab-num">R</span><div><h2>Reach us without data</h2><p>About a third of phones on Kenyan networks are basic phones, and data costs money. A line in the contact block: call, send an SMS, or send a free &ldquo;Please Call Me&rdquo; and the Foundation calls back.</p></div></div><div class="tagrow"><span class="tg st">Needs the Foundation&#39;s real details</span><span class="tg st">A promise: someone must call back</span></div><div class="lab-stage"><div class="cardx nd"><div><p class="eyebrow">No data?</p><h3 style="margin-top:10px;font-size:26px">Call, text, or ask us to call you.</h3><p style="margin-top:12px;color:var(--muted)">Send a Please Call Me to <span class="ph">placeholder number</span> and we will ring you back, Monday to Friday.</p></div><div class="nd-sms"><div><p class="me">Please call me. Thank you.</p><p>QOP Hope Foundation: we have your message and will call you today.</p></div></div></div></div></div></section><section class="lab-panel" id="dS"><div class="wrap"><span class="kind rep">Replaces something</span><div class="lab-head"><span class="lab-num">S</span><div><h2>&ldquo;Sponsor a term&rdquo; in place of &ldquo;Sponsor a child&rdquo;</h2><p>The button says &ldquo;Sponsor a child&rdquo;, but the Sponsor page says gifts are pooled and no child is matched to a donor. A careful reader sees the gap. This wording says what really happens.</p></div></div><div class="tagrow"><span class="tg st">Your call</span><span class="tg st">Changes the main button on every page</span></div><div class="lab-stage"><div class="cardx ba"><div class="seg" role="group" aria-label="Compare"><button type="button" class="ba-b" data-g="s" data-v="0" aria-pressed="true">Now</button><button type="button" class="ba-b" data-g="s" data-v="1" aria-pressed="false">Suggested</button></div><div class="ba-stage"><div class="mock-hero"><h3>Every child deserves a future.</h3><span class="btn btn-sun" data-sw="s" data-a="Sponsor a child" data-b="Sponsor a term">Sponsor a child</span><p data-sw="s" data-a="Further down the page: &ldquo;To keep children safe, we don&#39;t publish individual profiles. Your gift supports students through our Education Fund.&rdquo;" data-b="Right under the button: &ldquo;Your gift pays a term of school fees through our Education Fund, straight to the school.&rdquo;">Further down the page: &ldquo;To keep children safe, we don&#39;t publish individual profiles. Your gift supports students through our Education Fund.&rdquo;</p></div></div></div></div></div></section><section class="lab-panel" id="dT"><div class="wrap"><span class="kind rep">Replaces something</span><div class="lab-head"><span class="lab-num">T</span><div><h2>One quiet line in place of the colour stripe</h2><p>The stripe under the top bar is blocks of red-brown, gold, green, black, white and blue. It reads as a beadwork band, and green, black, white and red sit side by side in it, which is close to the flag. One line in the site&#39;s own terracotta avoids both.</p></div></div><div class="tagrow"><span class="tg st">Your call</span><span class="tg ok">Could go on now</span></div><div class="lab-stage"><div class="cardx ba"><div class="seg" role="group" aria-label="Compare"><button type="button" class="ba-b" data-g="t" data-v="0" aria-pressed="true">Now</button><button type="button" class="ba-b" data-g="t" data-v="1" aria-pressed="false">Suggested</button></div><div class="ba-stage"><div class="mock-head"><span><b>QOP Hope Foundation</b><small>Queen of Peace · Isiolo</small></span><nav><span>Home</span><span>About</span><span>Our work</span><span>Impact</span></nav></div><div class="mock-line" id="t-line"></div><div style="padding:26px 18px;color:var(--muted);font-size:14.5px">The rest of the page stays as it is.</div></div></div></div></div></section><section class="lab-panel" id="dU"><div class="wrap"><span class="kind ref">Refines what is there</span><div class="lab-head"><span class="lab-num">U</span><div><h2>A wider mix in the drawings</h2><p>Read as a set, the drawings lean one way: an umbrella acacia stands in most of them, and most of the women drawn wear a bead collar, in a county of many communities, most of it Muslim. Tap the ones you want redrawn (a classroom wall, a water point, a shop front, a mix of dress) and tell me the numbers.</p></div></div><div class="tagrow"><span class="tg st">Cliffe confirms</span><span class="tg st">Cliffe says what people and uniforms really look like</span></div><div class="lab-stage"><div class="au" id="au"><figure tabindex="0" data-n="1"><img src="img/ill-education.jpg" alt="Drawing 1" loading="lazy"><figcaption>1</figcaption></figure><figure tabindex="0" data-n="2"><img src="img/ill-girls.jpg" alt="Drawing 2" loading="lazy"><figcaption>2</figcaption></figure><figure tabindex="0" data-n="3"><img src="img/ill-protection.jpg" alt="Drawing 3" loading="lazy"><figcaption>3</figcaption></figure><figure tabindex="0" data-n="4"><img src="img/ill-family.jpg" alt="Drawing 4" loading="lazy"><figcaption>4</figcaption></figure><figure tabindex="0" data-n="5"><img src="img/ill-mentorship.jpg" alt="Drawing 5" loading="lazy"><figcaption>5</figcaption></figure><figure tabindex="0" data-n="6"><img src="img/ill-support.jpg" alt="Drawing 6" loading="lazy"><figcaption>6</figcaption></figure><figure tabindex="0" data-n="7"><img src="img/gift-supplies.jpg" alt="Drawing 7" loading="lazy"><figcaption>7</figcaption></figure><figure tabindex="0" data-n="8"><img src="img/gift-seat.jpg" alt="Drawing 8" loading="lazy"><figcaption>8</figcaption></figure><figure tabindex="0" data-n="9"><img src="img/gift-school.jpg" alt="Drawing 9" loading="lazy"><figcaption>9</figcaption></figure><figure tabindex="0" data-n="10"><img src="img/partner-school.jpg" alt="Drawing 10" loading="lazy"><figcaption>10</figcaption></figure><figure tabindex="0" data-n="11"><img src="img/trk-safety.jpg" alt="Drawing 11" loading="lazy"><figcaption>11</figcaption></figure><figure tabindex="0" data-n="12"><img src="img/pil-empower.jpg" alt="Drawing 12" loading="lazy"><figcaption>12</figcaption></figure></div><p class="cardx" id="au-out" style="padding:14px 18px;margin-top:16px;font-size:15px">None picked yet.</p></div></div></section><section class="lab-panel" id="dV"><div class="wrap"><span class="kind rep">Replaces something</span><div class="lab-head"><span class="lab-num">V</span><div><h2>The line under the logo</h2><p>&ldquo;Queen of Peace&rdquo; is a Catholic title, shown on every screen in a county where most families are Muslim, and the site does not yet say what the name means to Josephine. Until she does, the small line could simply say where the Foundation is.</p></div></div><div class="tagrow"><span class="tg st">Josephine decides</span><span class="tg st">Her name for it, her words</span></div><div class="lab-stage"><div class="cardx ba"><div class="seg" role="group" aria-label="Compare"><button type="button" class="ba-b" data-g="v" data-v="0" aria-pressed="true">Now</button><button type="button" class="ba-b" data-g="v" data-v="1" aria-pressed="false">Suggested</button></div><div class="ba-stage"><div class="mock-head"><span><b>QOP Hope Foundation</b><small data-sw="v" data-a="Queen of Peace · Isiolo" data-b="Isiolo County, Kenya">Queen of Peace · Isiolo</small></span><nav><span>Home</span><span>About</span><span>Our work</span><span>Impact</span></nav></div><div class="mock-line"></div><div style="padding:26px 18px;color:var(--muted);font-size:14.5px">The full name stays on the About page, where Josephine can say in her own words what it means.</div></div></div></div></div></section><section class="lab-panel" id="dW"><div class="wrap"><span class="kind add">Adds something new</span><div class="lab-head"><span class="lab-num">W</span><div><h2>The moon, when it is night in Isiolo</h2><p>For half of every day the header is dark and empty. At night it could show the moon in tonight&#39;s true phase, so the page is alive for visitors abroad during their daytime.</p></div></div><div class="tagrow"><span class="tg ok">Could go on now</span><span class="tg ok">Phase worked out from the date; no outside data</span></div><div class="lab-stage"><div class="mn" id="mn"><div class="mn-stars" aria-hidden="true"></div><svg viewBox="0 0 100 100" aria-hidden="true" id="mn-svg"></svg><h3 id="mn-h"></h3><p id="mn-p"></p></div></div><p class="src">In this demo the phase is real for today&#39;s date and the moon is simply centred. On the site it would also sit in its true place in the sky, like the sun.</p></div></section><section class="lab-panel" id="dX"><div class="wrap"><span class="kind rep">Replaces something</span><div class="lab-head"><span class="lab-num">X</span><div><h2>The Foundation&#39;s own report form</h2><p>Kenyan parents now read school reports in four levels: Exceeding, Meeting, Approaching or Below Expectation. The Impact page could grade the Foundation itself the same way each term, in place of a plain list of promises.</p></div></div><div class="tagrow"><span class="tg st">First grades after Term 1, 2027</span><span class="tg st">Josephine and Cliffe do the grading</span></div><div class="lab-stage"><div class="cardx tblwrap"><table class="tbl"><thead><tr><th>What we promised</th><th>Level</th><th>Remarks</th></tr></thead><tbody><tr><td>Every gift goes to the Foundation&#39;s own account</td><td><span class="lv" aria-label="Not yet graded"><i></i><i></i><i></i><i></i></span></td><td><span class="ph">after Term 1, 2027</span></td></tr><tr><td>Fees paid straight to the school, with a receipt</td><td><span class="lv" aria-label="Not yet graded"><i></i><i></i><i></i><i></i></span></td><td><span class="ph">after Term 1, 2027</span></td></tr><tr><td>Attendance and progress checked every term</td><td><span class="lv" aria-label="Not yet graded"><i></i><i></i><i></i><i></i></span></td><td><span class="ph">after Term 1, 2027</span></td></tr><tr><td>Totals shared openly; children&#39;s details kept private</td><td><span class="lv" aria-label="Not yet graded"><i></i><i></i><i></i><i></i></span></td><td><span class="ph">after Term 1, 2027</span></td></tr></tbody></table><p style="padding:0 14px 14px;color:var(--muted);font-size:13.5px">Levels: Exceeding, Meeting, Approaching, Below Expectation. Closing day: 9 April 2027. Next term opens: 3 May 2027.</p></div></div></div></section>
 </main>
-<footer class="lab-foot"><div class="wrap">Demo page for the QOP Hope Foundation website. Kiswahili on this page is a draft until a fluent speaker has checked it. Phone, payment and registration numbers are placeholders. <a href="demo.html">The first demo page</a></div></footer>
+<footer class="lab-foot"><div class="wrap">Demo page for the QOP Hope Foundation website. Phone, payment and registration details are placeholders. Dates are as reported in the press and need Cliffe&#39;s check. <a href="demo.html">The first demo page</a></div></footer>
 <script>
 (function(){const still=matchMedia('(prefers-reduced-motion:reduce)').matches,$=(q,r)=>(r||document).querySelector(q),$$=(q,r)=>[...(r||document).querySelectorAll(q)];
- const mins=()=>((Math.floor(Date.now()/6e4)+180)%1440+1440)%1440;   /* minutes after midnight in Isiolo, UTC+3 */
- const en=m=>{const h=Math.floor(m/60);return((h+11)%12+1)+':'+String(m%60).padStart(2,'0')+(h<12?' am':' pm')};
- /* Kiswahili numbers and the Swahili clock (hours counted from sunrise) */
- const N=['','moja','mbili','tatu','nne','tano','sita','saba','nane','tisa','kumi'],T=['','kumi','ishirini','thelathini','arobaini','hamsini'];
- const num=n=>n<=10?N[n]:(T[Math.floor(n/10)]+(n%10?' na '+N[n%10]:''));
- const part=h=>h>=4&&h<6?'alfajiri':h<12&&h>=6?'asubuhi':h>=12&&h<16?'mchana':h>=16&&h<19?'jioni':'usiku';
- const sw=m=>{const h=Math.floor(m/60),mm=m%60,sh=((h+6)%12)||12;return'Saa '+num(sh)+(mm===0?'':mm===15?' na robo':mm===30?' na nusu':' na dakika '+num(mm))+' '+part(h)};
- /* A */const lg=$('#lg');$$('.seg button',lg).forEach(b=>b.onclick=()=>{const l=+b.dataset.l;$$('.seg button',lg).forEach(x=>x.setAttribute('aria-pressed',x===b));lg.classList.add('sw-ing');setTimeout(()=>{$$('[data-t]',lg).forEach(e=>e.textContent=e.dataset.t.split('|')[l]);lg.classList.remove('sw-ing')},still?0:280)});
- /* B */const dial=$('#scd');for(let i=1;i<=12;i++){const a=i*30*Math.PI/180,b=document.createElement('b'),s=document.createElement('i');b.textContent=i;s.textContent=((i+6)%12)||12;
-   b.style.left=(50+38*Math.sin(a))+'%';b.style.top=(50-38*Math.cos(a))+'%';s.style.left=(50+26*Math.sin(a))+'%';s.style.top=(50-26*Math.cos(a))+'%';dial.append(b,s)}
- let scm=-1;function sc(){const m=scm<0?mins():scm;$('#sc-en').textContent=en(m);$('#sc-sw').textContent=sw(m);$('.sc-hand.h').style.transform='rotate('+((m%720)/2)+'deg)';$('.sc-hand.m').style.transform='rotate('+((m%60)*6)+'deg)'}
- $$('.sc-b').forEach(b=>b.onclick=()=>{scm=+b.dataset.m;$$('.sc-b').forEach(x=>x.setAttribute('aria-pressed',x===b));sc()});
- /* C */const G={alfajiri:['Habari ya asubuhi. Karibuni.','Good morning from Isiolo. You are welcome here.'],asubuhi:['Habari ya asubuhi. Karibuni.','Good morning from Isiolo. You are welcome here.'],mchana:['Habari ya mchana. Karibuni.','Good afternoon from Isiolo. You are welcome here.'],jioni:['Habari ya jioni. Karibuni.','Good evening from Isiolo. You are welcome here.'],usiku:['Habari za usiku. Karibuni.','It is night in Isiolo. You are welcome here.']};
- let grp='';function gr(){const m=mins(),p=grp||part(Math.floor(m/60)),box=$('#gr');box.dataset.p=p==='alfajiri'?'asubuhi':p;$('#gr-sw').textContent=G[p][0];$('#gr-en').textContent=G[p][1];$('#gr-t').textContent=grp?{asubuhi:'8:00 am',mchana:'1:00 pm',jioni:'6:00 pm',usiku:'9:00 pm'}[grp]:en(m)}
- $$('.gr-b').forEach(b=>b.onclick=()=>{grp=b.dataset.p;$$('.gr-b').forEach(x=>x.setAttribute('aria-pressed',x===b));gr()});
- /* D */const ML=['Pay Bill business number','Account number','Give online'],MN=['000 000','0000 0000 00','Link'];$$('.mp-t').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;$$('.mp-t').forEach(x=>x.setAttribute('aria-pressed',x===b));$$('.mp-pane').forEach((p,i)=>p.classList.toggle('on',i===k));$('#mp-lab').textContent=ML[k];$('#mp-n').textContent=MN[k]});
- $('.mp-copy').onclick=e=>{e.target.textContent='Placeholder: nothing to copy yet';setTimeout(()=>e.target.textContent='Copy the number',1800)};
- /* E */function wa(){const m=mins(),d=new Date(Date.now()+3*36e5).getUTCDay(),open=d>=1&&d<=5&&m>=480&&m<1020;$('#wa-open').innerHTML='<b style="color:'+(open?'#2f5230':'#93361f')+'">'+(open?'Open now':'Closed now')+'</b> in Isiolo, where it is '+en(m)}
- /* F */const M=[['Haba na haba','hujaza kibaba.','Little by little fills the measure.'],['Elimu ni','ufunguo wa maisha.','Education is the key to life.'],['Mtoto umleavyo','ndivyo akuavyo.','As you raise a child, so the child grows.']];
- const mt=$('#mt'),md=$('.mt-dots',mt);let mk=0,mtm=null;M.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Proverb '+(i+1));b.onclick=()=>{mshow(i);clearInterval(mtm)};md.appendChild(b)});
- function mshow(i){mk=i;const q=$('blockquote',mt);q.style.opacity=0;setTimeout(()=>{$('.sw',mt).innerHTML=M[i][0]+' <span class="mk u">'+M[i][1].replace(/\.$/,'')+'<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.';$('.en',mt).textContent=M[i][2];q.style.opacity=1;requestAnimationFrame(()=>requestAnimationFrame(()=>$('.mk',mt).classList.add('go')))},still?0:420);[...md.children].forEach((b,j)=>b.classList.toggle('on',j===i))}
- /* G */const PW=[['Amani','Kiswahili',1],['Nagaa','Borana',0],['Nabad','Somali',0],['Ekisil','Turkana',0],['Serian','Samburu',0]];const pr=$('#pc-r');let pk=0,ptm=null;
- PW.forEach((w,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=w[1]+'<i class="'+(w[2]?'y':'')+'">'+(w[2]?'certain':'to confirm')+'</i>';b.onclick=()=>{pshow(i);clearInterval(ptm)};pr.appendChild(b)});
- const kb=document.createElement('button');kb.type='button';kb.disabled=true;kb.innerHTML='Kimeru<i>ask a speaker</i>';pr.appendChild(kb);
- function pshow(i){pk=i;const w=$('#pc-w');w.classList.add('out');setTimeout(()=>{w.textContent=PW[i][0];$('#pc-l').textContent=PW[i][1];w.classList.remove('out')},still?0:380);[...pr.children].forEach((b,j)=>b.classList.toggle('on',j===i))}
- /* H */function yr(){const d=new Date(Date.now()+3*36e5),f=(d.getUTCMonth()+(d.getUTCDate()-1)/31)/12;$('#yr-now').style.left='calc('+(f*100).toFixed(2)+'% - 1px)'}
- /* K */const db=$('#ds-b');let dk=0,dtm=null;const dp=$$('#ds-p img');function dplay(){clearInterval(dtm);if(still)return;dtm=setInterval(()=>{dp[dk].classList.remove('on');dk=(dk+1)%dp.length;dp[dk].classList.add('on')},2600)}
- db.onclick=()=>{const on=db.getAttribute('aria-pressed')!=='true';db.setAttribute('aria-pressed',on);$('#ds-f').style.width=on?'12%':'100%';$('#ds-n').textContent=on?'0.3 MB':'2.3 MB';$('#ds-t').textContent=on?'One still photo. The rest, and the map, load only when you ask.':'Five moving photos at the top and two photo bands.';$('#ds-c').textContent=on?'1 photo, still':'5 photos, changing';
-  if(on){clearInterval(dtm);dp.forEach((x,i)=>x.classList.toggle('on',i===0));dk=0}else dplay()};
+ /* N: pick out the next date */
+ const today=new Date(Date.now()+3*36e5).toISOString().slice(0,10);let nx=false;$$('.kd-row').forEach(r=>{if(r.dataset.d<today)r.classList.add('past');else if(!nx){r.classList.add('next');nx=true}});
+ /* O */const GT=['Sponsor Term 1: half of a year’s fees fall due on opening day, 4 January. This is when a gift does the most.','Sponsor Term 2: three tenths of the year’s fees, due when schools open on 3 May.','Sponsor Term 3: the last fifth, due on 30 August, the term that ends with national assessments.'];
+ function gt(k){$$('.gt button').forEach((b,i)=>b.setAttribute('aria-pressed',i===k));$('#gt-out').textContent=GT[k]}$$('.gt button').forEach((b,i)=>b.onclick=()=>gt(i));gt(0);
+ /* Q */const gi=$('#gg-in');gi.oninput=()=>$('#gg-out').textContent=gi.value.trim()||'Your group';
+ /* S, T, V: before and after */
+ $$('.ba-b').forEach(b=>b.onclick=()=>{const g=b.dataset.g,v=b.dataset.v==='1';$$('.ba-b[data-g="'+g+'"]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  $$('[data-sw="'+g+'"]').forEach(e=>{e.style.opacity=0;setTimeout(()=>{e.innerHTML=v?e.dataset.b:e.dataset.a;e.style.opacity=1},still?0:250)});if(g==='t')$('#t-line').classList.toggle('one',v)});
+ /* U */const au=$('#au');function auOut(){const p=$$('figure.pick',au).map(f=>f.dataset.n);$('#au-out').textContent=p.length?'Redraw: '+p.join(', ')+'. Tell me these numbers.':'None picked yet.'}
+ $$('figure',au).forEach(f=>{const t=()=>{f.classList.toggle('pick');auOut()};f.onclick=t;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}}});
+ /* W: tonight's moon. Phase = days since a known new moon (6 Jan 2000, 18:14 UTC) divided by the length of a lunar month */
+ (function(){const syn=29.530588853,p=((Date.now()/864e5-10962.76)%syn+syn)%syn/syn,lit=(1-Math.cos(2*Math.PI*p))/2,R=40,k=Math.cos(2*Math.PI*p),wax=p<.5;
+  const names=['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent'],nm=names[Math.round(p*8)%8];
+  const side=wax?1:0,rx=Math.abs(k)*R,sweep=(k<0)===wax?1:0;
+  $('#mn-svg').innerHTML='<circle cx="50" cy="50" r="'+R+'" fill="#1b2140"/><path d="M50 '+(50-R)+'A'+R+' '+R+' 0 0 '+side+' 50 '+(50+R)+'A'+rx+' '+R+' 0 0 '+sweep+' 50 '+(50-R)+'Z" fill="#f4efdc"/>';
+  $('#mn-h').textContent=nm+' over Isiolo';$('#mn-p').textContent=Math.round(lit*100)+'% of the moon is lit tonight.';
+  const st=$('.mn-stars');for(let i=0;i<46;i++){const s=document.createElement('i');s.style.left=(Math.random()*100)+'%';s.style.top=(Math.random()*62)+'%';s.style.animationDelay=(Math.random()*4)+'s';if(i%5===0){s.style.width=s.style.height='3px'}st.appendChild(s)}})();
  /* router */
- function show(){let id=(location.hash||'#dA').slice(1);if(!document.getElementById(id))id='dA';$$('.lab-panel').forEach(p=>p.classList.toggle('on',p.id===id));$$('.lab-nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
-  clearInterval(mtm);clearInterval(ptm);clearInterval(dtm);
-  if(id==='dB')sc();if(id==='dC')gr();if(id==='dE')wa();if(id==='dF'){mshow(mk);if(!still)mtm=setInterval(()=>mshow((mk+1)%M.length),6000)}
-  if(id==='dG'){pshow(pk);if(!still)ptm=setInterval(()=>pshow((pk+1)%PW.length),2600)}
-  if(id==='dH'){yr();const y=$('#yr');y.classList.remove('go');void y.offsetWidth;y.classList.add('go')}if(id==='dI'){const l=$('#ld');l.classList.remove('go');void l.offsetWidth;l.classList.add('go')}if(id==='dK')dplay()}
- addEventListener('hashchange',()=>{show();const n=$('.lab-nav');if(n.getBoundingClientRect().bottom<0||innerWidth<821)$('.lab-panel.on').scrollIntoView({behavior:still?'auto':'smooth',block:'start'})});show();
- setInterval(()=>{sc();gr();wa()},20000);
+ function show(){let id=(location.hash||'#dN').slice(1);if(!document.getElementById(id))id='dN';$$('.lab-panel').forEach(p=>p.classList.toggle('on',p.id===id));$$('.lab-nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+  if(id==='dO')setTimeout(()=>$$('.gt-bar i').forEach(i=>i.style.width=i.dataset.w+'%'),200)}
+ addEventListener('hashchange',()=>{show();$('.lab-panel.on').scrollIntoView({behavior:still?'auto':'smooth',block:'start'})});show();
 })();
 </script>
 </body></html>
