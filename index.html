@@ -1045,6 +1045,8 @@ html.saver .hero .slides{animation:none}
 .lang-sw{display:inline-flex;background:#efe6d8;border-radius:50px;padding:3px;gap:2px;vertical-align:middle}
 .lang-sw button{font:600 12.5px var(--body);letter-spacing:.04em;border:0;background:transparent;color:var(--ink);padding:6px 11px;border-radius:50px;cursor:pointer;transition:background .2s,color .2s}
 .lang-sw button[aria-pressed=true]{background:#fff;color:var(--sun-ink);box-shadow:0 3px 8px -5px #1d252880}
+/* Kiswahili menu words are longer: tighten the menu so it stays on one line */
+@media (min-width:901px){html.sw header nav a[data-p]:not(.btn){font-size:13.5px;padding-left:8px;padding-right:8px}html.sw header nav ul{gap:2px}html.sw .lang-sw button{padding:5px 8px}}
 @media (hover:hover){.lang-sw button:hover{background:#ffffff99}}
 .sw-note{display:none;background:var(--gold-soft);color:#5d4208;font-size:13.5px;line-height:1.45;border-bottom:1px solid #ecd9a6}
 .sw-note .wrap{padding-block:9px}
@@ -1068,7 +1070,7 @@ html.sw-busy main{opacity:.55;transition:opacity .2s}
         <li><a href="#impact" data-p="impact">Impact</a></li>
         <li><a href="#partners" data-p="partners">Partners</a></li>
         <li><a href="#involved" data-p="involved">Get involved</a></li>
-        <li data-noi18n hidden id="lang-li"><span class="lang-sw" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true" title="English">EN</button><button type="button" data-l="sw" aria-pressed="false" title="Kiswahili">SW</button></span></li>
+        <li data-noi18n id="lang-li"><span class="lang-sw" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true" title="English">EN</button><button type="button" data-l="sw" aria-pressed="false" title="Kiswahili">SW</button></span></li>
         <li><a href="#sponsor" data-p="sponsor" class="btn btn-sun" style="padding:8px 18px;color:#fff">Give</a></li>
       </ul>
     </nav>
@@ -1581,7 +1583,7 @@ const QOP={phone:'',whatsapp:'',hours:'',paybill:'',paybillAccount:'',legalForm:
 <script>
 /* Kiswahili switch. The English is the page itself; sw.json holds the draft Kiswahili, keyed by a fingerprint of each English piece. */
 (function(){const R=document.documentElement,SKIP='script,style,svg,select,textarea,input,.leaflet-container,#topo,.it-scrub,[data-noi18n]';
- const norm=h=>h.replace(/<svg[\s\S]*?<\/svg>/g,'{svg}').replace(/\s+/g,' ').trim();
+ const norm=h=>h.replace(/<svg[\s\S]*?<\/svg>/g,'{svg}').replace(/(class="mk [uo])(?: go)+"/g,'$1"').replace(/\s+/g,' ').trim();
  const hash=s=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return h.toString(36)};
  /* a "unit" is the smallest element that carries words of its own; its inner markup is translated as one piece */
  function units(){const out=[];(function walk(el){for(const c of el.children){if(c.matches(SKIP))continue;let own=false;for(const n of c.childNodes)if(n.nodeType===3&&n.nodeValue.trim()){own=true;break}if(own)out.push(c);else walk(c)}})(document.body);return out}
