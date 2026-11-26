@@ -1122,6 +1122,13 @@ html.saver footer{background:#1d2528!important}
  .mb0{stop-color:#fffbf0}.mb1{stop-color:#f3ead3}.mb2{stop-color:#dccfb1}
 }
 </style>
+<style id="moon-v3">
+/* moonlight: the night picture is a little brighter when the moon is up (--ml, 0 with no moon), so that its shadows have light to fall across */
+.pagehead .dusk::before{filter:brightness(calc(1 + var(--ml,0)))}
+/* shadows cast by the moon: cool, not the day's warm brown */
+.moon-sh .shade{filter:blur(2px)}
+.moon-sh .shade i.r,.moon-sh .shade i.t::before,.moon-sh .shade i.t::after{background:#070d18}
+</style>
 </head>
 <body data-font="fraunces" data-bg="none">
 <a class="skip" href="#home" data-noi18n>Skip to the content</a>
@@ -1589,7 +1596,7 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
   if(!still)document.querySelectorAll('.band').forEach(b=>{if(!b.offsetHeight)return;const r=b.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;b.style.setProperty('--py',(((r.top+r.height/2)/innerHeight-.5)*-56).toFixed(1)+'px')});}
  /* the moon on the header: place, size, colour (amber when low, as the real one is), and the lit shape turned the way it faces.
     By day it is pale; as the sun goes down it warms and brightens */
- let mkey='',mfor=null,mrk='',mrc=[];
+ let mkey='',mfor=null,mrk='',mrc=[];const ML=.7;   /* the most the moon lights the night picture, full moon overhead (.7 = seven tenths brighter) */
  function mdraw(tm,s,W,yh,ph){const m=moon(tm),S=R.style,x=Math.cos(m.alt*rad)*Math.sin(m.az),md=(W<700?.8:1)*(76-28*cl(m.alt/22)),cx=W*(50+45*x)/100,cy=yh-(yh-46)*Math.max(-.25,Math.min(1,m.alt/m.top));
   /* nt: 0 by day, 1 at night. By day the moon is pale: under 5% lit it cannot be seen, by 20% it is plain; low in the haze it fades */
   const nt=cl((4-s.alt)/10),pale=.9*cl((m.k-.05)/.15)*cl((m.alt-1)/7);let o=(pale+(1-pale)*nt)*cl((m.alt+2.5)/2.5)*cl((m.k-.01)/.01);
@@ -1597,6 +1604,13 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
   if(o>0){const rk=W+'x'+ph.offsetHeight+R.lang+ph.textContent.length;if(ph!==mfor||rk!==mrk){mfor=ph;mrk=rk;mrc=[];const b=ph.getBoundingClientRect(),rg=document.createRange();
     ph.querySelectorAll('h1,.lead,.eyebrow,button.it-chip').forEach(e=>{rg.selectNodeContents(e);for(const r of (e.tagName==='BUTTON'?[e.getBoundingClientRect()]:rg.getClientRects()))if(r.width>2)mrc.push([r.left-b.left,r.top-b.top,r.right-b.left,r.bottom-b.top])})}
    let near=1e9;for(const r of mrc)near=Math.min(near,Math.hypot(Math.max(r[0]-cx,0,cx-r[2]),Math.max(r[1]-cy,0,cy-r[3]))-md/2);if(R.classList.contains('dk'))o*=.32+.68*cl(near/14)}
+  /* shadows cast by the moon, once the sun is down: laid out like the sun's, away from the moon. lx is its light on the ground in lux (phase, height, haze);
+     tw is what is left of twilight. They show only when moonlight is a fair share of all the light. ml is how much the moon lights the night picture; inside a shadow that light is taken away again */
+  R.classList.toggle('moon-sh',s.alt<=0);let ml=0;if(s.alt<=0){const a=Math.acos(2*cl(m.k)-1)/rad,sa=Math.sin(Math.max(m.alt,0)*rad),lx=.25*sa*10**(-.4*(.026*a+4e-9*a**4+.2*(1/Math.sqrt(.04+.96*sa*sa)-1))),
+    h=s.alt,tw=h>-6?400*10**(h*.345):h>-12?3.4*10**((h+6)*.438):.008*10**((h+12)*.187),ct=Math.min(3,1/Math.tan(Math.max(m.alt,4)*rad));
+   S.setProperty('--shx',(Math.sin(m.az)*ct).toFixed(3));S.setProperty('--shy',(-Math.max(.08,Math.cos(m.az))*ct*.36).toFixed(3));
+   ml=ML*lx/(1.1*lx+tw+.001)*cl(Math.log10(lx/.001)/2.4);S.setProperty('--sho',((1-(1+.12*ml)/(1+ml))/.95).toFixed(3))}
+  S.setProperty('--ml',ml.toFixed(3));
   S.setProperty('--mx',(50+45*x).toFixed(2)+'%');S.setProperty('--my',cy.toFixed(1)+'px');
   S.setProperty('--md',md.toFixed(1)+'px');S.setProperty('--mo',o.toFixed(3));S.setProperty('--mh',(1-(1-cl(m.alt/16))*nt).toFixed(3));S.setProperty('--me',(.06*nt*cl((.45-m.k)/.35)).toFixed(3));S.setProperty('--mn',nt.toFixed(3));R.classList.toggle('moon-day',nt<.5);
   R.classList.toggle('moon-on',s.alt<-1&&m.alt>0&&m.k>.01);R.classList.toggle('moon-right',x>.3);
