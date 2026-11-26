@@ -523,6 +523,15 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
 .kanga.sm{display:none}
 .founder img{aspect-ratio:4/3!important;object-position:center 20%!important}
 
+/* who we support: plain grouped list, nothing that looks clickable */
+.who{display:grid;gap:22px 34px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px}
+.who h3{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sun-ink);padding-bottom:8px;border-bottom:2px solid var(--sun)}
+.who div:nth-child(2) h3{border-color:var(--gold)}.who div:nth-child(3) h3{border-color:var(--acacia)}
+.who ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:9px}
+.who li{font-size:16px;line-height:1.4;padding-left:16px;position:relative;cursor:default}
+.who li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--sun)}
+.who div:nth-child(2) li::before{background:var(--gold)}.who div:nth-child(3) li::before{background:var(--acacia)}
+
 /* icons v2: cut-paper badges */
 .ic2{width:72px;height:72px;border-radius:58% 42% 55% 45%/48% 56% 44% 52%;background:var(--gold-soft);box-shadow:inset 0 0 0 1px rgba(29,37,40,.06),0 6px 14px -8px rgba(29,37,40,.35);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-radius .5s}
 .path:nth-child(2) .ic2{background:var(--sun-soft);border-radius:45% 55% 42% 58%/55% 45% 56% 44%}
@@ -593,8 +602,10 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
       <div>
         <p class="eyebrow">Who we support</p>
         <h2 style="margin-top:8px">The children most likely to be left behind.</h2>
-        <div class="tags">
-          <span>Girls at risk of early marriage and FGM</span><span>Children affected by gender-based violence</span><span>Orphans and children from poor households</span><span>Bright children without the means to study</span><span>Children from pastoralist communities</span><span>Children who need protection and care</span><span>Teenage mothers returning to school</span>
+        <div class="who">
+          <div><h3>Girls</h3><ul><li>Girls at risk of early marriage and FGM</li><li>Teenage mothers returning to school</li></ul></div>
+          <div><h3>Safety</h3><ul><li>Children affected by gender-based violence</li><li>Children who need protection and care</li></ul></div>
+          <div><h3>Access to school</h3><ul><li>Orphans and children from poor households</li><li>Bright children without the means to study</li><li>Children from pastoralist communities</li></ul></div>
         </div>
         
       </div>
@@ -808,7 +819,7 @@ mb.onclick=()=>{const o=document.getElementById('nav').classList.toggle('open');
 <script>
 document.documentElement.classList.add('js');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.querySelectorAll('section h2, .pillar, .card, .step, .post, .tier, .box, .photo, .stat, .tags, .video, .map, .lead').forEach(el=>el.classList.add('reveal'));
+document.querySelectorAll('section h2, .pillar, .card, .step, .post, .tier, .box, .photo, .stat, .tags, .who, .video, .map, .lead').forEach(el=>el.classList.add('reveal'));
 function countUp(el){if(el.dataset.done)return;el.dataset.done=1;const t=+el.dataset.count,d=+(el.dataset.dec||0),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
   if(reduce){el.textContent=pre+t.toFixed(d)+suf;return}const t0=performance.now(),dur=1400;
   (function f(n){const k=Math.min(1,(n-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=pre+(t*e).toFixed(d)+suf;if(k<1)requestAnimationFrame(f)})(t0);}
