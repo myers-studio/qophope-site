@@ -869,6 +869,29 @@ button{color:inherit}
 @media (max-width:700px){.hero-pause{bottom:16px}.hero .credit{bottom:20px}.dots{bottom:72px}}
 @media (max-width:350px){.logo b{white-space:normal}}
 </style>
+<style id="sky-v2">
+/* more sky above and more ground below, so the whole sunset plays while the header is still on screen */
+.pagehead{padding-block:128px 264px!important}
+@media (max-width:700px){.pagehead{padding-block:84px 214px!important}}
+/* the time label is a button: tap it to move through the day in Isiolo, or to come back to now */
+button.it-chip{cursor:pointer;-webkit-appearance:none;appearance:none;font:600 12.5px var(--body)}
+button.it-chip::after{content:"";width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:2px;opacity:.6;transition:transform .2s}
+button.it-chip[aria-expanded=true]::after{transform:rotate(225deg) translateY(-1px)}
+.it-scrub{width:min(420px,100%);margin:-6px 0 18px;padding:14px 16px 12px;border-radius:16px;background:#fffffff2;border:1px solid #e4d9c8;box-shadow:0 16px 34px -20px #1d2528aa;color:var(--ink);text-align:left}
+.it-scrub[hidden]{display:none}
+.it-scrub input{display:block;width:100%;margin:0;height:22px;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+.it-scrub input::-webkit-slider-runnable-track{height:10px;border-radius:6px;background:linear-gradient(90deg,#161d3c 0%,#161d3c 21%,#e9763f 25.5%,#f6d58a 30%,#cfe6f3 38%,#cfe6f3 64%,#f6c453 71%,#e2562f 76%,#3a2a48 80%,#161d3c 86%,#161d3c 100%)}
+.it-scrub input::-moz-range-track{height:10px;border-radius:6px;background:linear-gradient(90deg,#161d3c 0%,#161d3c 21%,#e9763f 25.5%,#f6d58a 30%,#cfe6f3 38%,#cfe6f3 64%,#f6c453 71%,#e2562f 76%,#3a2a48 80%,#161d3c 86%,#161d3c 100%)}
+.it-scrub input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-6px;border-radius:50%;background:#fff;border:2px solid var(--ink);box-shadow:0 2px 6px #0004}
+.it-scrub input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--ink)}
+.it-ticks{display:flex;justify-content:space-between;font:600 10.5px var(--body);letter-spacing:.04em;color:var(--muted);margin-top:4px}
+.it-swl{margin:12px 0 0;font:600 17px var(--display);color:var(--sun-ink)}
+.it-swl small{display:block;font:400 12.5px var(--body);color:var(--muted);margin-top:2px}
+.it-now{margin-top:12px;font:600 13px var(--body);border:0;border-radius:50px;padding:8px 14px;background:var(--ink);color:#fff;cursor:pointer}
+/* during the drop-in the drawn borders are hidden: stretched by the zoom they turned into a large blur. They fade back in on landing */
+#topo .leaflet-overlay-pane{transition:opacity .5s}
+#topo.flying .leaflet-overlay-pane{opacity:0}
+</style>
 </head>
 <body data-font="fraunces" data-bg="none">
 <div class="bg" aria-hidden="true"></div>
@@ -1005,7 +1028,7 @@ button{color:inherit}
 
 <!-- ================= ABOUT ================= -->
 <div class="page" id="p-about">
-  <div class="pagehead"><div class="wrap"><span class="it-chip" title="Local time in Isiolo, Kenya. The sun in the page header is where it is in the sky there right now."><i aria-hidden="true"></i><span>Isiolo time <span class="it-clock"></span></span></span><p class="eyebrow">About us</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)">Protecting a child and educating a child are <span class="mkw"><span class="mk u">one responsibility<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">QOP Hope Foundation (Queen of Peace Hope Foundation) is a community-focused organisation based in Isiolo County, northern Kenya.</p></div></div>
+  <div class="pagehead"><div class="wrap"><button type="button" class="it-chip" aria-expanded="false" title="The sun in this header is where it is over Isiolo right now. Tap to move through the day."><i aria-hidden="true"></i><span><span class="it-lab">Isiolo time</span> <span class="it-clock"></span></span></button><p class="eyebrow">About us</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)">Protecting a child and educating a child are <span class="mkw"><span class="mk u">one responsibility<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">QOP Hope Foundation (Queen of Peace Hope Foundation) is a community-focused organisation based in Isiolo County, northern Kenya.</p></div></div>
   <section><div class="wrap two">
     <div><h3>Our mission</h3><p style="color:var(--muted);margin-top:8px">To provide vulnerable children with access to quality education, protection, mentorship and opportunities that enable them to become confident, independent and responsible members of society.</p>
     <h3 style="margin-top:28px">Our vision</h3><p style="color:var(--muted);margin-top:8px">A society where every child enjoys education, protection, dignity and equal opportunities to build a better future.</p>
@@ -1025,7 +1048,7 @@ button{color:inherit}
 
 <!-- ================= PROGRAMMES ================= -->
 <div class="page" id="p-programmes">
-  <div class="pagehead"><div class="wrap"><span class="it-chip" title="Local time in Isiolo, Kenya. The sun in the page header is where it is in the sky there right now."><i aria-hidden="true"></i><span>Isiolo time <span class="it-clock"></span></span></span><p class="eyebrow">Our work</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)"><span class="mkw"><span class="mk u">Education first<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>,</span> with safety and family at its side.</h1><p class="lead">Five programmes that work together, starting with education sponsorship.</p></div></div>
+  <div class="pagehead"><div class="wrap"><button type="button" class="it-chip" aria-expanded="false" title="The sun in this header is where it is over Isiolo right now. Tap to move through the day."><i aria-hidden="true"></i><span><span class="it-lab">Isiolo time</span> <span class="it-clock"></span></span></button><p class="eyebrow">Our work</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)"><span class="mkw"><span class="mk u">Education first<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>,</span> with safety and family at its side.</h1><p class="lead">Five programmes that work together, starting with education sponsorship.</p></div></div>
   <section class="jp-sec"><div class="wrap"><div class="center-head"><p class="eyebrow">One school year</p><h2 style="margin-top:8px">A child&#39;s path, step by step.</h2></div><div class="jp"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="jp-bg" d="M50 0C50 6 20 6 20 12.5C20 25 80 25 80 37.5C80 50 20 50 20 62.5C20 75 80 75 80 87.5C80 94 50 94 50 100"/></svg><svg class="jp-top" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="jp-fg" d="M50 0C50 6 20 6 20 12.5C20 25 80 25 80 37.5C80 50 20 50 20 62.5C20 75 80 75 80 87.5C80 94 50 94 50 100"/></svg><i class="jp-dot d1" data-y="12.5" style="left:20%;top:12.5%"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 43S10 29 10 19a14 14 0 0 1 28 0c0 10-14 24-14 24z" fill="#b5452b"/><circle cx="24" cy="19" r="6" fill="#fffaf2"/></svg></i><i class="jp-dot d2" data-y="37.5" style="left:80%;top:37.5%"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="21" width="28" height="19" rx="1.5" fill="#fffaf2"/><path d="M5.5 23.5L24 10l18.5 13.5z" fill="#b5452b"/><path d="M21 40v-8a3 3 0 0 1 6 0v8z" fill="#1d2528"/><rect x="13.2" y="27" width="5" height="5.4" rx=".8" fill="#d9a441"/><rect x="29.8" y="27" width="5" height="5.4" rx=".8" fill="#d9a441"/><path d="M24 10V4l7 2.3L24 8.6" fill="#3f6b3a"/></svg></i><i class="jp-dot d3" data-y="62.5" style="left:20%;top:62.5%"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z" fill="#fffaf2"/><path d="M17 15h14M17 22h14M17 29h8" stroke="#1d2528" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="31" r="5.5" fill="#3f6b3a"/><path d="M29.4 31l2 2 3.4-4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i class="jp-dot d4" data-y="87.5" style="left:80%;top:87.5%"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="7" width="30" height="34" rx="3" fill="#fffaf2"/><rect x="15" y="26" width="4.5" height="9" rx="1" fill="#d9a441"/><rect x="21.8" y="20" width="4.5" height="15" rx="1" fill="#b5452b"/><rect x="28.6" y="14" width="4.5" height="21" rx="1" fill="#3f6b3a"/></svg></i><div class="jp-stop r" data-y="12.5" style="top:12.5%"><span>Step 1</span><h3>Found</h3><p>We find a student who is out of school or about to drop out.</p></div><div class="jp-stop l" data-y="37.5" style="top:37.5%"><span>Step 2</span><h3>Enrolled</h3><p>We link the student to a place in a local school.</p></div><div class="jp-stop r" data-y="62.5" style="top:62.5%"><span>Step 3</span><h3>Fees paid</h3><p>Fees, uniform and books are paid. The receipt is kept.</p></div><div class="jp-stop l" data-y="87.5" style="top:87.5%"><span>Step 4</span><h3>Term report</h3><p>Attendance and progress are tracked each term.</p></div></div><div class="jp-end"><div class="jp-end-pic"><img src="img/gift-school.jpg" alt="Illustration: a small school building beside an acacia tree" loading="lazy"></div><h3>Then the next term begins.</h3><p>And the path starts again.</p><a class="btn btn-sun" href="#sponsor">Sponsor a child</a></div></div></section>
   <section><div class="wrap" style="display:grid;gap:22px">
     <div class="box glass-card prog"><figure class="ill"><img class="illus-lg" src="img/ill-education.jpg" alt="Illustration: school books, a uniform and a school bag on a table" loading="lazy"></figure><div><span class="eyebrow">01 · Starting now</span><h2 style="margin-top:6px">Education sponsorship</h2><p style="color:var(--muted);margin-top:10px">We find students who are out of school or about to drop out, link them to a place in a local school, and pay what stands in the way: fees, uniforms, books and essentials. Boarding school where a child needs to be safe.</p></div><div><h3>What we track</h3><ul class="list"><li>Fees due and paid, with school receipts</li><li>Attendance each term</li><li>Progress to the next class</li></ul></div></div>
@@ -1037,7 +1060,7 @@ button{color:inherit}
 
 <!-- ================= IMPACT ================= -->
 <div class="page" id="p-impact">
-  <div class="pagehead"><div class="wrap"><span class="it-chip" title="Local time in Isiolo, Kenya. The sun in the page header is where it is in the sky there right now."><i aria-hidden="true"></i><span>Isiolo time <span class="it-clock"></span></span></span><p class="eyebrow">Open by default</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,50px)">Every shilling, every student, <span class="mkw"><span class="mk u">every term<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">We are setting up our records now. Our first results will be published here after the January 2027 term: totals only, never children's details. This is what we will track and share.</p></div></div>
+  <div class="pagehead"><div class="wrap"><button type="button" class="it-chip" aria-expanded="false" title="The sun in this header is where it is over Isiolo right now. Tap to move through the day."><i aria-hidden="true"></i><span><span class="it-lab">Isiolo time</span> <span class="it-clock"></span></span></button><p class="eyebrow">Open by default</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,50px)">Every shilling, every student, <span class="mkw"><span class="mk u">every term<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">We are setting up our records now. Our first results will be published here after the January 2027 term: totals only, never children's details. This is what we will track and share.</p></div></div>
   <section><div class="wrap">
     <!-- First-term counter. Put the three REAL totals in data-n (and as the text), then change the tag to the term they cover. Never sample numbers. -->
     <div class="ct wait" id="first-term"><span class="ct-tag">First count: after the January 2027 term</span><p class="ct-k">The first term in numbers</p><div class="ct-grid"><div><b data-n=""><span class="vh">Not counted yet: </span><i class="ct-slot" aria-hidden="true"></i><i class="ct-slot" aria-hidden="true"></i></b><span class="l">students in class</span></div><div><b data-n=""><span class="vh">Not counted yet: </span><i class="ct-slot" aria-hidden="true"></i><i class="ct-slot" aria-hidden="true"></i></b><span class="l">terms of fees paid</span></div><div><b data-n=""><span class="vh">Not counted yet: </span><i class="ct-slot" aria-hidden="true"></i><i class="ct-slot" aria-hidden="true"></i></b><span class="l">school receipts on file</span></div></div><p class="ct-note">These three totals go live here once the first term&#39;s school receipts are in. Totals only, never children&#39;s details.</p></div>
@@ -1052,7 +1075,7 @@ button{color:inherit}
 
 <!-- ================= SPONSOR ================= -->
 <div class="page" id="p-sponsor">
-  <div class="pagehead"><div class="wrap"><span class="it-chip" title="Local time in Isiolo, Kenya. The sun in the page header is where it is in the sky there right now."><i aria-hidden="true"></i><span>Isiolo time <span class="it-clock"></span></span></span><p class="eyebrow">Sponsor a child</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)">Help a child reach school, <span class="mkw"><span class="mk u">and stay there<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">Your gift joins our Education Fund, which pays fees straight to schools. We share how every shilling is used.</p></div></div>
+  <div class="pagehead"><div class="wrap"><button type="button" class="it-chip" aria-expanded="false" title="The sun in this header is where it is over Isiolo right now. Tap to move through the day."><i aria-hidden="true"></i><span><span class="it-lab">Isiolo time</span> <span class="it-clock"></span></span></button><p class="eyebrow">Sponsor a child</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)">Help a child reach school, <span class="mkw"><span class="mk u">and stay there<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">Your gift joins our Education Fund, which pays fees straight to schools. We share how every shilling is used.</p></div></div>
   <section><div class="wrap">
     <div class="gp"><div><p class="eyebrow">Your gift</p><h2>Pick a way to give, see what it does.</h2>
       <div class="gp-btns" role="tablist" aria-label="Ways to give"><button type="button" role="tab" aria-selected="true" data-k="0">Give once</button><button type="button" role="tab" aria-selected="false" data-k="1">Give monthly<small>Most helpful</small></button><button type="button" role="tab" aria-selected="false" data-k="2">Sponsor a term</button></div>
@@ -1073,7 +1096,7 @@ button{color:inherit}
 
 <!-- ================= PARTNERS ================= -->
 <div class="page" id="p-partners">
-  <div class="pagehead"><div class="wrap"><span class="it-chip" title="Local time in Isiolo, Kenya. The sun in the page header is where it is in the sky there right now."><i aria-hidden="true"></i><span>Isiolo time <span class="it-clock"></span></span></span><p class="eyebrow">Partners</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,50px)">Schools, donors and partners,<br><span class="mkw"><span class="mk u">working as one<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">Children stay in school when schools, families and supporters pull together. Here is how you can work with us.</p></div></div>
+  <div class="pagehead"><div class="wrap"><button type="button" class="it-chip" aria-expanded="false" title="The sun in this header is where it is over Isiolo right now. Tap to move through the day."><i aria-hidden="true"></i><span><span class="it-lab">Isiolo time</span> <span class="it-clock"></span></span></button><p class="eyebrow">Partners</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,50px)">Schools, donors and partners,<br><span class="mkw"><span class="mk u">working as one<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8C18 3 38 10 58 6S88 4 98 7" stroke-width="3.2"/></svg></span>.</span></h1><p class="lead">Children stay in school when schools, families and supporters pull together. Here is how you can work with us.</p></div></div>
   <section><div class="wrap">
     <div class="paths">
       <div class="path glass-card"><span class="ic2 pic"><img src="img/partner-school.jpg" alt="Illustration: a small school with a red roof beside an acacia tree" loading="lazy"></span><h3>Partner school</h3><p>Re-admit and support our students. We pay fees on time, keep receipts, and share attendance with you each term.</p><ul class="list"><li>Fees paid directly, every term</li><li>A named contact at the Foundation</li><li>Fee-balance and payment-plan letters</li></ul><a class="btn btn-sun magnet" href="#involved">Become a partner school</a></div>
@@ -1086,7 +1109,7 @@ button{color:inherit}
 
 <!-- ================= GET INVOLVED ================= -->
 <div class="page" id="p-involved">
-  <div class="pagehead"><div class="wrap"><span class="it-chip" title="Local time in Isiolo, Kenya. The sun in the page header is where it is in the sky there right now."><i aria-hidden="true"></i><span>Isiolo time <span class="it-clock"></span></span></span><p class="eyebrow">Get involved</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)">Partners, donors, volunteers and well-wishers: <span class="mkw"><span class="mk o">join us<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 4C22 3 3 11 4 22c1 12 26 16 51 15 27-1 42-9 41-19C95 8 70 2 38 6" stroke-width="2.2"/></svg></span>.</span></h1></div></div>
+  <div class="pagehead"><div class="wrap"><button type="button" class="it-chip" aria-expanded="false" title="The sun in this header is where it is over Isiolo right now. Tap to move through the day."><i aria-hidden="true"></i><span><span class="it-lab">Isiolo time</span> <span class="it-clock"></span></span></button><p class="eyebrow">Get involved</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,48px)">Partners, donors, volunteers and well-wishers: <span class="mkw"><span class="mk o">join us<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 4C22 3 3 11 4 22c1 12 26 16 51 15 27-1 42-9 41-19C95 8 70 2 38 6" stroke-width="2.2"/></svg></span>.</span></h1></div></div>
   <section><div class="wrap two">
     <div style="display:grid;gap:16px">
       <div class="box glass-card"><h3>Schools</h3><p style="color:var(--muted);margin-top:6px">Partner with us to re-admit and support students.</p></div>
@@ -1189,7 +1212,7 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
  box.innerHTML='<div class="cmp-b"></div><div class="cmp-a"></div><div class="cmp-h" role="slider" tabindex="0" aria-label="Drag to compare the satellite view and the plain map" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><span class="cmp-l cmp-l1">Satellite</span><span class="cmp-l cmp-l2">Map</span><button type="button" class="map-full" aria-pressed="false"><svg class="e1" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="e2" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Full map</span></button>';
  const ea=box.querySelector('.cmp-a'),eb=box.querySelector('.cmp-b'),h=box.querySelector('.cmp-h'),fb=box.querySelector('.map-full');
  const touch=matchMedia('(hover:none)').matches,still=matchMedia('(prefers-reduced-motion:reduce)').matches,BOUNDS=[[-7,31],[7.5,45]],MINZ=5,Z0=1.25;
- const o={scrollWheelZoom:false,dragging:!touch,minZoom:1,maxZoom:12,zoomSnap:0,zoomDelta:1,maxBoundsViscosity:.9,attributionControl:false};
+ const o={scrollWheelZoom:false,dragging:!touch,minZoom:1,maxZoom:12,zoomSnap:0,zoomDelta:1,maxBoundsViscosity:.9,attributionControl:false,fadeAnimation:false};
  let flying=false,seen=false,isoB=null,ctr=L.latLng(0.9,38.4),zEnd=7,full=false;
  A=L.map(ea,o).setView(ctr,7);
  B=L.map(eb,Object.assign({zoomControl:false},o)).setView(ctr,7);
@@ -1208,7 +1231,7 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
   L.geoJSON(g,{style:f=>f.properties.name==='Isiolo'?{color:'#b5452b',weight:3.5,fillColor:'#d9a441',fillOpacity:.22,lineJoin:'round'}:{color:'#1d2528',weight:1,opacity:.55,dashArray:'4 6',fill:false},
    onEachFeature:(f,l)=>{const me=f.properties.name==='Isiolo';l.bindTooltip(me?'Isiolo County':f.properties.name,{permanent:true,direction:'center',className:me?'tt-isiolo':'tt-county tt-dark'})}}).addTo(B);
   if(is){isoB=is.getBounds();ctr=isoB.getCenter();zEnd=Math.max(MINZ,Math.floor(A.getBoundsZoom(isoB,false,L.point(60,60))+1e-6));
-   if(still){A.setView(ctr,zEnd,{animate:false});push(A,B)}else if(seen)flyIn();else wide()}});
+   if(still){A.setView(ctr,zEnd,{animate:false});push(A,B)}else{ready=preload();if(seen)flyIn();else wide()}}});
  [A,B].forEach(m=>L.circleMarker([0.3546,37.5822],{radius:6,color:'#fff',weight:2.5,fillColor:'#e2562f',fillOpacity:1}).addTo(m).bindTooltip('Isiolo town',{direction:'right',offset:[8,0]}));
  function set(p){p=Math.max(4,Math.min(96,p));ea.style.clipPath='inset(0 '+(100-p)+'% 0 0)';h.style.left=p+'%';h.setAttribute('aria-valuenow',Math.round(p))}
  let drag=false;h.addEventListener('pointerdown',e=>{drag=true;h.setPointerCapture(e.pointerId);e.preventDefault()});
@@ -1218,9 +1241,16 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
  function grab(on){[A,B].forEach(m=>m.dragging[on&&(full||!touch)?'enable':'disable']())}
  function wide(){flying=true;fence(false);grab(false);box.classList.add('flying');ea.style.clipPath='inset(0 0 0 0)';A.setView(ctr,Z0,{animate:false})}
  function land(){if(!flying)return;flying=false;fence(true);grab(true);push(A,B);box.classList.remove('flying');const t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/1100),e=1-Math.pow(1-k,3);if(!drag)set(96-46*e);if(k<1&&!drag)requestAnimationFrame(f)})(t0)}
- let run=0;function flyIn(){if(!isoB||still)return;const me=++run;wide();setTimeout(()=>{if(me!==run)return;A._moveStart(true,false);const t0=performance.now(),dur=4200;
+ /* satellite tiles for every zoom level on the way down, fetched ahead (skipped when the device asks to save data) */
+ let ready=null;const SAT='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/';
+ function preload(){if(navigator.connection&&navigator.connection.saveData)return Promise.resolve();const W=Math.max(box.offsetWidth,320),H=Math.max(box.offsetHeight,320),ps=[];
+  for(let z=Math.round(Z0);z<=zEnd;z++){const c=A.project(ctr,z),n=2**z,hw=W*.75,hh=H*.75;
+   for(let x=Math.floor((c.x-hw)/256);x<=Math.floor((c.x+hw)/256);x++)for(let y=Math.max(0,Math.floor((c.y-hh)/256));y<=Math.min(n-1,Math.floor((c.y+hh)/256));y++)
+    ps.push(new Promise(r=>{const im=new Image();im.onload=im.onerror=r;im.src=SAT+z+'/'+y+'/'+(((x%n)+n)%n)}))}
+  return Promise.race([Promise.all(ps),new Promise(r=>setTimeout(r,4000))])}
+ let run=0;function flyIn(){if(!isoB||still)return;const me=++run;wide();(ready||Promise.resolve()).then(()=>setTimeout(()=>{if(me!==run)return;A._moveStart(true,false);const t0=performance.now(),dur=4200;
    (function f(n){if(me!==run||!flying)return;const k=Math.min(1,(n-t0)/dur),e=1-Math.pow(1-k,3);A._move(ctr,Z0+(zEnd-Z0)*e,{flyTo:true});
-    if(k<1)requestAnimationFrame(f);else{A._moveEnd(true);A.setView(ctr,zEnd,{animate:false});land()}})(t0)},650)}
+    if(k<1)requestAnimationFrame(f);else{A._moveEnd(true);A.setView(ctr,zEnd,{animate:false});land()}})(t0)},450))}
  new IntersectionObserver((es,ob)=>{if(es[0].isIntersecting){seen=true;ob.disconnect();flyIn()}},{threshold:.5}).observe(box);
  const rp=document.querySelector('.topo-replay');if(rp)rp.onclick=()=>{if(!flying)flyIn()};
  h.addEventListener('keydown',e=>{const v=+h.getAttribute('aria-valuenow');if(e.key==='ArrowLeft'){set(v-5);e.preventDefault()}if(e.key==='ArrowRight'){set(v+5);e.preventDefault()}});
@@ -1248,18 +1278,19 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
  /* preview any hour: add ?isiolo=07:30 (or dawn, day, noon, eve, night) before the # */
  const q=new URLSearchParams(location.search).get('isiolo'),pv=/^(\d{1,2}):(\d{2})$/.exec({dawn:'06:25',day:'10:00',noon:'12:15',eve:'18:00',night:'22:00'}[q]||q||'');
  const mins=ms=>((Math.floor(ms/6e4)+180)%1440+1440)%1440;   /* minutes after midnight in Isiolo (UTC+3, no clock changes) */
- function now(){const t=Date.now();return pv?t+((+pv[1]*60+ +pv[2])-mins(t))*6e4:t}
+ let ov=null;   /* minutes of the day picked on the time slider; null means the real time */
+ function now(){const t=Date.now(),m=ov!=null?ov:pv?(+pv[1]*60+ +pv[2]):null;return m==null?t:t+(m-mins(t))*6e4}
  function clock(ms){const m=mins(ms),h=Math.floor(m/60);return((h+11)%12+1)+':'+String(m%60).padStart(2,'0')+(h<12?' am':' pm')}
  const light=alt=>{const dusk=cl((10-alt)/12);return{dusk,dk:dusk>=.4?1:0,nt:cl((-2-alt)/8)}};
  let t=0,eve=false,T0=Date.now(),T1=T0;
  /* once a minute: read the clock, and work out how far scrolling may run the day forward (to sunset, or on into night) */
  function plan(){T0=now();T1=T0;const a=sun(T0).alt,up=sun(T0+12e4).alt>a,e=a<0;
-  document.querySelectorAll('.it-clock').forEach(x=>x.textContent=clock(T0));
+  document.querySelectorAll('.it-clock').forEach(x=>x.textContent=clock(T0));document.querySelectorAll('.it-lab').forEach(x=>x.textContent=ov!=null?'Isiolo at':'Isiolo time');if(!scr.hidden){const m=mins(T0);if(document.activeElement!==rng)rng.value=m;swl.textContent=swt(m)}
   if(e!==eve){eve=e;document.body.classList.toggle('eve',eve)}
   if(still||a<=-12)return;const down=!up&&a<=0,goal=down?-12:-2;let risen=down||a>0;
   for(let m=2;m<=960;m+=2){const x=sun(T0+m*6e4).alt;if(!risen){if(x>0)risen=true;continue}if(x<=goal){T1=T0+m*6e4;break}}}
  function u(){t=0;const y=R.scrollTop,ph=[...document.querySelectorAll('.pagehead')].find(e=>e.offsetHeight);
-  if(ph){const k=Math.min(1,y/(ph.offsetHeight*.7)),s=sun(T0+(T1-T0)*k),Lt=light(s.alt),S=R.style,W=ph.offsetWidth,Hh=ph.offsetHeight,yh=Hh-.297*Math.max(Hh,W*768/1792),hi=cl(s.alt/22);
+  if(ph){const k=Math.min(1,y/(ph.offsetHeight*.36)),s=sun(T0+(T1-T0)*k),Lt=light(s.alt),S=R.style,W=ph.offsetWidth,Hh=ph.offsetHeight,yh=Hh-.297*Math.max(Hh,W*768/1792),hi=cl(s.alt/22);
    S.setProperty('--dusk',Lt.dusk.toFixed(3));S.setProperty('--dk',Lt.dk.toFixed(3));S.setProperty('--nt',Lt.nt.toFixed(3));
    S.setProperty('--sx',(50+45*Math.cos(s.alt*rad)*Math.sin(s.az)).toFixed(2)+'%');
    S.setProperty('--sy',(yh-(yh-46)*Math.max(-.25,Math.min(1,s.alt/s.top))).toFixed(1)+'px');
@@ -1267,6 +1298,19 @@ document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.body.da
   const jp=document.querySelector('.jp');if(jp&&jp.offsetHeight){const r=jp.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight*.62-r.top)/r.height));jp.style.setProperty('--jp',p.toFixed(3));
    jp.querySelectorAll('[data-y]').forEach(e=>e.classList.toggle('on',p*100>=+e.dataset.y-2));const end=document.querySelector('.jp-end');if(end)end.classList.toggle('on',p>=.985)}
   if(!still)document.querySelectorAll('.band').forEach(b=>{if(!b.offsetHeight)return;const r=b.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;b.style.setProperty('--py',(((r.top+r.height/2)/innerHeight-.5)*-56).toFixed(1)+'px')});}
+ /* tap the time label: a slider through the day, the same time on the Swahili clock, and a way back to now */
+ const Nw=['','moja','mbili','tatu','nne','tano','sita','saba','nane','tisa','kumi'],Tw=['','kumi','ishirini','thelathini','arobaini','hamsini'],num=n=>n<=10?Nw[n]:(Tw[Math.floor(n/10)]+(n%10?' na '+Nw[n%10]:'')),
+  part=h=>h>=4&&h<6?'alfajiri':h>=6&&h<12?'asubuhi':h>=12&&h<16?'mchana':h>=16&&h<19?'jioni':'usiku',
+  swt=m=>{const h=Math.floor(m/60),mm=m%60;return'Saa '+num(((h+6)%12)||12)+(mm===0?'':mm===15?' na robo':mm===30?' na nusu':' na dakika '+num(mm))+' '+part(h)};
+ const scr=document.createElement('div');scr.className='it-scrub';scr.hidden=true;
+ scr.innerHTML='<input type="range" min="0" max="1439" step="1" aria-label="Time of day in Isiolo"><div class="it-ticks" aria-hidden="true"><span>12 am</span><span>6 am</span><span>noon</span><span>6 pm</span><span>12 am</span></div><p class="it-swl"><span lang="sw"></span><small>The same time on the Swahili clock, where the hours are counted from sunrise.</small></p><button type="button" class="it-now">Back to Isiolo time now</button>';
+ const rng=scr.querySelector('input'),swl=scr.querySelector('[lang=sw]');
+ function openScr(chip,on){document.querySelectorAll('button.it-chip').forEach(c=>c.setAttribute('aria-expanded',c===chip&&on));if(on){chip.after(scr);scr.hidden=false;rng.value=mins(T0);swl.textContent=swt(mins(T0))}else scr.hidden=true}
+ document.querySelectorAll('button.it-chip').forEach(c=>c.onclick=()=>{const open=scr.hidden||scr.previousElementSibling!==c;if(R.scrollTop>4)scrollTo({top:0,behavior:still?'auto':'smooth'});openScr(c,open)});
+ rng.oninput=()=>{ov=+rng.value;plan();u()};
+ scr.querySelector('.it-now').onclick=()=>{const real=mins(Date.now()),from=ov;if(still||from==null){ov=null;plan();u();openScr(null,false);return}
+  let d=real-from;if(d>720)d-=1440;if(d<-720)d+=1440;const t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/900),e=1-Math.pow(1-k,3);ov=k>=1?null:((from+d*e)%1440+1440)%1440;plan();u();if(k<1)requestAnimationFrame(f);else openScr(null,false)})(t0)};
+ addEventListener('hashchange',()=>{ov=null;openScr(null,false);plan()});
  plan();setInterval(()=>{plan();u()},20000);
  addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(u)},{passive:true});addEventListener('resize',u);addEventListener('hashchange',()=>setTimeout(u,400));u();
  /* first-term counter: counts up only when every figure holds a real number */
