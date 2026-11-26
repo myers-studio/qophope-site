@@ -517,6 +517,29 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
 .impact::before{opacity:.06!important;background:
  linear-gradient(135deg,transparent 47%,#fff 47% 53%,transparent 53%) 0 0/36px 36px,
  linear-gradient(45deg,transparent 47%,#fff 47% 53%,transparent 53%) 0 0/36px 36px!important}
+
+/* beadwork band v2: depth, plus small flares across the site */
+:root{--kanga:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><defs><radialGradient id='b' cx='.35' cy='.3' r='.8'><stop offset='0' stop-color='%23fff'/><stop offset='.55' stop-color='%23f1e6d2'/><stop offset='1' stop-color='%23a39170'/></radialGradient><linearGradient id='r' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23d0603f'/><stop offset='1' stop-color='%238c3220'/></linearGradient><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23263034'/><stop offset='.5' stop-color='%231d2528'/><stop offset='1' stop-color='%2312181a'/></linearGradient></defs><rect width='28' height='28' fill='url(%23g)'/><rect width='28' height='4.5' fill='url(%23r)'/><rect y='23.5' width='28' height='4.5' fill='url(%23r)'/><rect y='4.5' width='28' height='1.2' fill='%23000' fill-opacity='.35'/><rect width='28' height='.8' fill='%23fff' fill-opacity='.25'/><path d='M0 6.5L14 24.5L28 6.5M0 24.5L14 6.5L28 24.5' stroke='%23000' stroke-opacity='.5' stroke-width='2.8' fill='none'/><path d='M0 5.5L14 23.5L28 5.5M0 23.5L14 5.5L28 23.5' stroke='%23d9a441' stroke-width='2.4' fill='none'/><path d='M0 5L14 23L28 5M0 23L14 5L28 23' stroke='%23f6d993' stroke-width='.6' stroke-opacity='.8' fill='none'/><g fill='%23000' fill-opacity='.5'><circle cx='14.6' cy='15.4' r='2.5'/><circle cx='.6' cy='15.4' r='2.5'/><circle cx='28.6' cy='15.4' r='2.5'/></g><g fill='url(%23b)'><circle cx='14' cy='14.5' r='2.4'/><circle cx='0' cy='14.5' r='2.4'/><circle cx='28' cy='14.5' r='2.4'/></g></svg>")}
+.kanga{height:28px;position:relative;z-index:1;background:var(--kanga) center/28px 28px repeat-x;box-shadow:0 8px 16px -6px #000a,0 1px 0 #0006}
+.kanga::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ffffff26 0,#fff0 30%,#0000 65%,#00000040 100%);pointer-events:none}
+.kanga.sm{height:14px;background-size:14px 14px;box-shadow:0 5px 10px -5px #0009}
+.pagehead::after{height:14px!important;background:var(--kanga) center/14px 14px repeat-x!important;box-shadow:0 -6px 12px -6px #0006}
+.quote{position:relative;padding-top:26px}
+.quote::before{content:"";position:absolute;left:0;top:0;width:98px;height:14px;border-radius:3px;background:var(--kanga) left/14px 14px repeat-x;box-shadow:0 4px 8px -4px #0008}
+.path.glass-card,.box.prog{position:relative;overflow:hidden}
+.path.glass-card::after,.box.prog::after{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:var(--kanga) center/7px 7px repeat-x;opacity:0;transform:translateY(-7px);transition:opacity .3s,transform .3s}
+.path.glass-card:hover::after,.box.prog:hover::after,.path.featured2::after{opacity:1;transform:none}
+.founder img{aspect-ratio:10/7!important;object-position:center!important}
+.founder{position:relative}
+.founder::before{content:"";position:absolute;left:18px;top:-7px;width:84px;height:14px;border-radius:3px;z-index:1;background:var(--kanga) left/14px 14px repeat-x;box-shadow:0 4px 8px -3px #0009}
+@media (prefers-reduced-motion:reduce){.path.glass-card::after,.box.prog::after{transition:none}}
+
+/* icons v2: cut-paper badges */
+.ic2{width:72px;height:72px;border-radius:58% 42% 55% 45%/48% 56% 44% 52%;background:var(--gold-soft);box-shadow:inset 0 0 0 1px rgba(29,37,40,.06),0 6px 14px -8px rgba(29,37,40,.35);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-radius .5s}
+.path:nth-child(2) .ic2{background:var(--sun-soft);border-radius:45% 55% 42% 58%/55% 45% 56% 44%}
+.path:nth-child(3) .ic2{background:var(--acacia-soft);border-radius:52% 48% 60% 40%/44% 58% 42% 56%}
+.path:hover .ic2{transform:rotate(-4deg) scale(1.06)}
+@media (prefers-reduced-motion:reduce){.path:hover .ic2{transform:none}}
 </style>
 </head>
 <body data-font="fraunces" data-bg="none">
@@ -586,7 +609,7 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
         </div>
         
       </div>
-      <div class="photo-glass glass-card"><div class="photo"><img src="img/cliffe/boma-from-above.jpg" alt="A family homestead in Isiolo County seen from above, with its thorn-fence livestock enclosure" loading="lazy"><span class="credit-chip">Photo: Cliffe Wasike</span></div></div>
+      <div class="photo-glass glass-card"><div class="photo"><img src="img/ill-support.jpg" alt="Illustration: two children in school uniform, seen from behind, walking across red earth towards a school" loading="lazy"><span class="credit-chip">Illustration</span></div></div>
     </div>
   </section>
 
@@ -605,6 +628,7 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
     </div>
   </section>
 
+  <div class="kanga sm" aria-hidden="true"></div>
   <section class="impact">
     <div class="wrap">
       <div class="center-head"><p class="eyebrow" style="color:var(--gold)">Our promise</p>
@@ -648,6 +672,7 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
   </section>
 
 
+  <div class="kanga sm" aria-hidden="true"></div>
   <section class="band band-give">
     <div class="wrap" style="text-align:center;max-width:760px">
       <p class="eyebrow">Sponsor a child, transform a future</p>
@@ -674,7 +699,7 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
     <div class="topo glass-card"><div id="topo" role="img" aria-label="Topographic map of Isiolo County with neighbouring county borders"></div><div class="topo-key"><span><i class="k-is"></i>Isiolo County border</span><span><i class="k-nb"></i>Neighbouring counties</span><span><i class="k-town"></i>Isiolo town</span></div></div>
   </div><div class="wrap"><p class="caption">Satellite imagery: © Esri, Maxar, Earthstar Geographics. County borders: geoBoundaries (public domain). Only the county town is marked; no villages.</p></div></section>
   <section><div class="wrap two">
-    <div><p class="eyebrow">Our people</p><h2 style="margin-top:8px">Founder and team</h2><p style="color:var(--muted);margin-top:14px">Founded by Josephine Ekiru, a peacebuilder from Isiolo and founder of the Queen of Peace Initiative, recipient of the 2021 Women Building Peace Award.</p></div>
+    <div><p class="eyebrow">Our people</p><h2 style="margin-top:8px">Founder and team</h2><p style="color:var(--muted);margin-top:14px">Founded by Josephine Ekiru, a peacebuilder from Isiolo and founder of the Queen of Peace Initiative, recipient of the 2021 Women Building Peace Award.</p><figure class="founder"><img src="img/cliffe/josephine-speaking.jpg" alt="Josephine Ekiru speaking into a microphone at a community meeting under acacia trees" loading="lazy"><figcaption>Josephine Ekiru at a community meeting. Photo: Cliffe Wasike</figcaption></figure></div>
     <div><p class="eyebrow">Our safeguarding promise</p><h2 style="margin-top:8px">Children's safety comes first</h2><ul class="list"><li>We never publish a child's name, face, school or village</li><li>Stories are shared only with consent from the child and guardian</li><li>Concerns are reported to the right authorities</li><li>Every gift goes to the Foundation's own account</li></ul><p style="color:var(--muted);margin-top:18px">Questions or concerns about a child's safety? Email <a href="mailto:hello@qophope.org">hello@qophope.org</a>.</p></div>
   </div><div class="wrap"></div></section>
 </div>
@@ -734,9 +759,9 @@ nav a:not(.btn):hover::after,nav a.on:not(.btn)::after{transform:scaleX(1)}
   <div class="pagehead"><div class="wrap"><p class="eyebrow">Partners</p><h1 style="margin-top:8px;font-size:clamp(32px,5vw,50px)">Schools, donors and partners,<br>working as one.</h1><p class="lead">Children stay in school when schools, families and supporters pull together. Here is how you can work with us.</p></div></div>
   <section><div class="wrap">
     <div class="paths">
-      <div class="path glass-card"><span class="ic2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 10v9h14v-9"/><path d="M10 19v-5h4v5"/><path d="M12 4V2"/></svg></span><h3>Partner school</h3><p>Re-admit and support our students. We pay fees on time, keep receipts, and share attendance with you each term.</p><ul class="list"><li>Fees paid directly, every term</li><li>A named contact at the Foundation</li><li>Fee-balance and payment-plan letters</li></ul><a class="btn btn-sun magnet" href="#involved">Become a partner school</a></div>
-      <div class="path glass-card featured2"><span class="ic2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l4-4 5 3 5-3 4 4"/><path d="M7 8l5 7 5-7"/><path d="M3 12v5h18v-5"/></svg></span><h3>Funding partner</h3><p>Fund a programme, a school or a cohort of students, with reports in the format you need.</p><ul class="list"><li>Concept notes and budgets on request</li><li>Term and annual reports from our tracker</li><li>Recognition on our website, if you wish</li></ul><a class="btn btn-sun magnet" href="#involved">Partner with us</a></div>
-      <div class="path glass-card"><span class="ic2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><h3>Donor</h3><p>Give once or monthly. Every shilling is traced from your gift to a school receipt.</p><ul class="list"><li>A thank-you from the Foundation</li><li>Regular updates on how gifts are used</li><li>Listed as a supporter, if you wish</li></ul><a class="btn btn-sun magnet" href="#sponsor">Give</a></div>
+      <div class="path glass-card"><span class="ic2"><svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="37" cy="11" r="5" fill="#d9a441"/><path d="M24 11V3" stroke="#1d2528" stroke-width="1.6" stroke-linecap="round"/><path d="M24 3.2l7.5 2.4L24 8.2z" fill="#3f6b3a"/><rect x="10" y="21" width="28" height="19" rx="1.5" fill="#fffaf2"/><path d="M5.5 23.5L24 10l18.5 13.5z" fill="#b5452b"/><path d="M21 40v-8a3 3 0 0 1 6 0v8z" fill="#1d2528"/><rect x="13.2" y="27" width="5" height="5.4" rx=".8" fill="#d9a441"/><rect x="29.8" y="27" width="5" height="5.4" rx=".8" fill="#d9a441"/><path d="M4 41.2c8-1.6 30-1.8 40 0" stroke="#3f6b3a" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></span><h3>Partner school</h3><p>Re-admit and support our students. We pay fees on time, keep receipts, and share attendance with you each term.</p><ul class="list"><li>Fees paid directly, every term</li><li>A named contact at the Foundation</li><li>Fee-balance and payment-plan letters</li></ul><a class="btn btn-sun magnet" href="#involved">Become a partner school</a></div>
+      <div class="path glass-card featured2"><span class="ic2"><svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><ellipse cx="24" cy="40" rx="13" ry="4.2" fill="#a8741f"/><ellipse cx="24" cy="37.4" rx="13" ry="4.2" fill="#d9a441"/><ellipse cx="24" cy="35.4" rx="10.5" ry="3" fill="#a8741f"/><ellipse cx="24" cy="33.4" rx="10.5" ry="3" fill="#e7b95c"/><path d="M24 33V15" stroke="#2f5230" stroke-width="2.4" stroke-linecap="round"/><path d="M24 25c-8 .4-12-3.6-12.4-10 7-.6 12 2.6 12.4 10z" fill="#3f6b3a"/><path d="M24 19c-.4-7 3.4-11.6 11-12.4.8 7-3 12-11 12.4z" fill="#6b9a5b"/></svg></span><h3>Funding partner</h3><p>Fund a programme, a school or a cohort of students, with reports in the format you need.</p><ul class="list"><li>Concept notes and budgets on request</li><li>Term and annual reports from our tracker</li><li>Recognition on our website, if you wish</li></ul><a class="btn btn-sun magnet" href="#involved">Partner with us</a></div>
+      <div class="path glass-card"><span class="ic2"><svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><path d="M24 31S12 24.2 12 15.2a6.6 6.6 0 0 1 12-3.8 6.6 6.6 0 0 1 12 3.8C36 24.2 24 31 24 31z" fill="#b5452b"/><circle cx="18.2" cy="14.6" r="2.1" fill="#e9a48f"/><path d="M6 31c3.4 8.6 10.4 12 18 12s14.6-3.4 18-12c-5.4 3.6-11.4 5.4-18 5.4S11.4 34.6 6 31z" fill="#1d2528"/><circle cx="14" cy="38.3" r="1.2" fill="#d9a441"/><circle cx="19" cy="40" r="1.2" fill="#f6efe4"/><circle cx="24" cy="40.6" r="1.2" fill="#d9a441"/><circle cx="29" cy="40" r="1.2" fill="#f6efe4"/><circle cx="34" cy="38.3" r="1.2" fill="#d9a441"/></svg></span><h3>Donor</h3><p>Give once or monthly. Every shilling is traced from your gift to a school receipt.</p><ul class="list"><li>A thank-you from the Foundation</li><li>Regular updates on how gifts are used</li><li>Listed as a supporter, if you wish</li></ul><a class="btn btn-sun magnet" href="#sponsor">Give</a></div>
     </div>
 
   </div><div class="wrap"></div></section>
